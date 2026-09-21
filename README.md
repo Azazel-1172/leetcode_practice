@@ -31,15 +31,19 @@ python3 lcdaily.py sync                        # 重建本頁總覽
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽
 
-共 **1** 題　|　已解 **0** 題　|　最後更新：2026-09-21
+共 **1** 題　|　已解 **1** 題　|　最後更新：2026-09-21
 
 | 日期 | # | 題目 | 難度 | 狀態 | 標籤 | 連結 |
 |---|---|---|---|---|---|---|
-| 2026-09-21 | 3524 | [求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md) | 中等 | ⬜ 未解 | `陣列`、`數學`、`動態規劃 DP` | [LC](https://leetcode.com/problems/find-x-value-of-array-i/) |
+| 2026-09-21 | 3524 | [求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md) | 中等 | ✅ 已解 | `滾動陣列`、`取餘數`、`遞推`、`計數陣列`、`陣列`、`數學` | [LC](https://leetcode.com/problems/find-x-value-of-array-i/) |
 
 ## 🏷️ 標籤索引
 
 - **動態規劃 DP** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **取餘數** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **數學** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **滾動陣列** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **計數陣列** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **遞推** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **陣列** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 <!-- LCDAILY:END -->

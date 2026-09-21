@@ -1,6 +1,11 @@
 {
-  "userTags": [],
-  "status": "todo",
+  "userTags": [
+    "滾動陣列",
+    "取餘數",
+    "遞推",
+    "計數陣列"
+  ],
+  "status": "done",
   "notes": "",
   "id": "3524",
   "date": "2026-09-21",
