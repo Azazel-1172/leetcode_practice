@@ -27,6 +27,7 @@ import textwrap
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib import error, request
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parent
 DAILY_DIR = ROOT / "daily"
@@ -58,6 +59,44 @@ EXT_BY_LANG = {
 COMMENT_BY_EXT = {
     "py": "#", "rb": "#", "php": "#",
 }
+# 使用者常打的簡寫 -> LeetCode 的 langSlug
+LANG_ALIASES = {
+    "ts": "typescript", "js": "javascript", "py": "python3", "python": "python3",
+    "c++": "cpp", "cs": "csharp", "c#": "csharp", "go": "golang", "kt": "kotlin",
+    "rb": "ruby", "rs": "rust",
+}
+
+CONFIG_FILE = ROOT / "lcconfig.json"
+DEFAULT_CONFIG = {
+    "langs": ["typescript", "cpp", "javascript"],
+    "translate": "auto",
+    "zh": "tw",
+    "site": "com",
+}
+
+
+def load_config() -> dict:
+    cfg = dict(DEFAULT_CONFIG)
+    if CONFIG_FILE.exists():
+        try:
+            cfg.update(json.loads(CONFIG_FILE.read_text("utf-8")))
+        except json.JSONDecodeError as e:
+            print(f"! {CONFIG_FILE.name} 格式有誤，改用預設值：{e}", file=sys.stderr)
+    return cfg
+
+
+def normalize_langs(raw: str | None, cfg: dict) -> list[str]:
+    """把 --lang 的輸入（逗號分隔、可用簡寫）正規化成 langSlug 清單。"""
+    if raw:
+        items = [x.strip().lower() for x in raw.split(",") if x.strip()]
+    else:
+        items = list(cfg.get("langs") or DEFAULT_CONFIG["langs"])
+    out = []
+    for x in items:
+        slug = LANG_ALIASES.get(x, x)
+        if slug not in out:
+            out.append(slug)
+    return out
 
 
 # --------------------------------------------------------------------------
@@ -476,6 +515,116 @@ def html_to_md(html_text: str) -> str:
 
 
 # --------------------------------------------------------------------------
+# Markdown -> HTML（網頁 app 顯示題目用）
+# --------------------------------------------------------------------------
+
+def _esc(t: str) -> str:
+    return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _inline(t: str) -> str:
+    """處理行內語法。先整段跳脫，再把 markdown 標記還原成標籤。"""
+    t = _esc(t)
+    t = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", r'<img alt="\1" src="\2">', t)
+    t = re.sub(r"\[([^\]]+)\]\(([^)]+)\)",
+               r'<a href="\2" target="_blank" rel="noopener">\1</a>', t)
+    t = re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
+    t = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", t)
+    t = re.sub(r"(?<!\*)\*([^*\n]+)\*(?!\*)", r"<em>\1</em>", t)
+    return t
+
+
+# 整行是 HTML 標籤（含 <summary>文字</summary> 這種有內文的）就原樣穿透
+_RAW_HTML = re.compile(
+    r"^\s*</?(?:details|summary|div|br|img|p|hr)\b.*>\s*$", re.I)
+
+
+def md_to_html(md: str) -> str:
+    """
+    把題目 README 的 Markdown 轉成 HTML。
+
+    只需要支援 lcdaily 自己產生的那些語法：標題、段落、清單、
+    程式碼圍欄、行內標記、引言，以及原樣穿透的 <details> 摺疊區塊。
+    """
+    out: list[str] = []
+    list_stack: list[str] = []   # "ul" / "ol"
+    in_code = False
+    para: list[str] = []
+
+    def flush_para() -> None:
+        if para:
+            out.append(f"<p>{_inline(' '.join(para))}</p>")
+            para.clear()
+
+    def close_lists(depth: int = 0) -> None:
+        while len(list_stack) > depth:
+            out.append(f"</{list_stack.pop()}>")
+
+    for raw in md.splitlines():
+        line = raw.rstrip()
+
+        if line.lstrip().startswith("```"):
+            flush_para()
+            if in_code:
+                out.append("</code></pre>")
+            else:
+                close_lists()
+                out.append("<pre><code>")
+            in_code = not in_code
+            continue
+        if in_code:
+            out.append(_esc(raw))
+            continue
+
+        if not line.strip():
+            flush_para()
+            continue
+
+        if _RAW_HTML.match(line):
+            flush_para()
+            close_lists()
+            out.append(line.strip())
+            continue
+
+        h = re.match(r"^(#{1,6})\s+(.*)$", line)
+        if h:
+            flush_para()
+            close_lists()
+            lvl = len(h.group(1))
+            out.append(f"<h{lvl}>{_inline(h.group(2))}</h{lvl}>")
+            continue
+
+        li = re.match(r"^(\s*)([-*]|\d+\.)\s+(.*)$", line)
+        if li:
+            flush_para()
+            indent, marker, text = li.group(1), li.group(2), li.group(3)
+            depth = len(indent) // 2 + 1
+            kind = "ol" if marker[0].isdigit() else "ul"
+            close_lists(depth)
+            if len(list_stack) < depth:
+                out.append(f"<{kind}>")
+                list_stack.append(kind)
+            out.append(f"<li>{_inline(text)}</li>")
+            continue
+
+        bq = re.match(r"^>\s?(.*)$", line)
+        if bq:
+            flush_para()
+            close_lists()
+            out.append(f"<blockquote>{_inline(bq.group(1))}</blockquote>")
+            continue
+
+        close_lists()
+        para.append(line.strip())
+
+    flush_para()
+    close_lists()
+    if in_code:
+        out.append("</code></pre>")
+    return "\n".join(out)
+
+
+# --------------------------------------------------------------------------
 # Git
 # --------------------------------------------------------------------------
 
@@ -604,12 +753,16 @@ def render_problem_md(q: dict, date: str, meta: dict) -> str:
     return "\n".join(lines)
 
 
-def render_solution(q: dict, lang: str) -> tuple[str, str]:
+def render_solution(q: dict, lang: str, title_zh: str = "") -> tuple[str, str]:
     ext = EXT_BY_LANG.get(lang, "txt")
     snippet = q["codeSnippets"].get(lang, "")
+    if not snippet:
+        print(f"  ! LeetCode 沒有提供 {lang} 的函式簽名，留空白樣板", file=sys.stderr)
     c = COMMENT_BY_EXT.get(ext)
+    title_zh = title_zh or q["titleZh"]
+    name = f"{title_zh} ({q['title']})" if title_zh != q["title"] else q["title"]
     header_lines = [
-        f"{q['id']}. {q['titleZh']} ({q['title']})",
+        f"{q['id']}. {name}",
         f"https://leetcode.com/problems/{q['slug']}/",
         f"難度：{DIFFICULTY_ZH.get(q['difficulty'], q['difficulty'])}",
     ]
@@ -619,10 +772,11 @@ def render_solution(q: dict, lang: str) -> tuple[str, str]:
         header = "".join(f"{c} {l}\n" for l in header_lines) + "\n"
     else:
         header = "/*\n" + "".join(f" * {l}\n" for l in header_lines) + " */\n\n"
-    return f"solution.{ext}", header + (snippet or "// TODO") + "\n"
+    placeholder = "# TODO" if COMMENT_BY_EXT.get(ext) == "#" else "// TODO"
+    return f"solution.{ext}", header + (snippet or placeholder) + "\n"
 
 
-def write_problem(q: dict, date: str, lang: str, force: bool) -> Path:
+def write_problem(q: dict, date: str, langs: list[str], force: bool) -> Path:
     d = DAILY_DIR / folder_name(date, q["slug"])
     d.mkdir(parents=True, exist_ok=True)
 
@@ -651,24 +805,30 @@ def write_problem(q: dict, date: str, lang: str, force: bool) -> Path:
             "translated": q["translated"],
             "translateSource": q["translateSource"],
         })
+    meta["langs"] = langs
     meta.setdefault("userTags", [])
     meta.setdefault("status", "todo")
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", "utf-8")
 
     readme = d / "README.md"
-    if readme.exists() and not force:
+    if readme.exists() and meta.get("translated") and not q["translated"]:
+        # 別讓沒帶翻譯的重抓蓋掉已經翻好的題目，--force 也不行
+        print(f"  · {readme.relative_to(ROOT)} 已翻譯，跳過覆蓋"
+              f"（真的要重來請先手動刪掉它）")
+    elif readme.exists() and not force:
         print(f"  · {readme.relative_to(ROOT)} 已存在，保留不覆蓋（要重抓加 --force）")
     else:
         readme.write_text(render_problem_md(q, date, meta), "utf-8")
         print(f"  · 寫入 {readme.relative_to(ROOT)}")
 
-    fname, code = render_solution(q, lang)
-    sol = d / fname
-    if sol.exists():
-        print(f"  · {sol.relative_to(ROOT)} 已存在，保留你的解答")
-    else:
-        sol.write_text(code, "utf-8")
-        print(f"  · 寫入 {sol.relative_to(ROOT)}")
+    for lang in langs:
+        fname, code = render_solution(q, lang, meta.get("titleZh", ""))
+        sol = d / fname
+        if sol.exists():
+            print(f"  · {sol.relative_to(ROOT)} 已存在，保留你的解答")
+        else:
+            sol.write_text(code, "utf-8")
+            print(f"  · 寫入 {sol.relative_to(ROOT)}")
 
     if q["exampleTestcases"]:
         tc = d / "testcases.txt"
@@ -749,15 +909,29 @@ INDEX_HEADER = """# LeetCode 每日挑戰
 並把題目與提示翻成繁體中文。零相依套件，只用 Python 標準函式庫。
 
 ```bash
-python3 lcdaily.py fetch                  # 抓今天的每日挑戰（開分支 + 建資料夾）
-python3 lcdaily.py fetch --slug two-sum   # 抓指定題目
-python3 lcdaily.py tag two-sum 雜湊表 雙指標   # 解完題加標籤
-python3 lcdaily.py done two-sum           # 標記已解
-python3 lcdaily.py list --tag 遞迴        # 依標籤找題目
-python3 lcdaily.py sync                   # 重建本頁總覽
+python3 lcdaily.py fetch      # 抓今日挑戰（開分支 + 建題目資料夾）
+python3 lcdaily.py serve      # 開啟總覽 app（Mac / Windows 通用）
 ```
 
-翻譯方式見 [docs/翻譯設定.md](docs/翻譯設定.md)。
+`serve` 會在 <http://127.0.0.1:8765> 啟動本機網頁 app，可以篩選、搜尋、看中文題目，
+並直接改標籤、狀態與筆記——會寫回 `meta.json` 與該題 README，本頁總覽同步更新。
+
+<details>
+<summary>其他指令</summary>
+
+```bash
+python3 lcdaily.py fetch --slug two-sum        # 抓指定題目
+python3 lcdaily.py fetch --lang ts,cpp         # 這次改用別的語言
+python3 lcdaily.py tag two-sum 雜湊表 雙指標    # 加自訂標籤
+python3 lcdaily.py done two-sum                # 標記已解
+python3 lcdaily.py list --tag 遞迴             # 依標籤找題目
+python3 lcdaily.py sync                        # 重建本頁總覽
+```
+
+</details>
+
+- 解題語言、翻譯方式等預設值改 [`lcconfig.json`](lcconfig.json)
+- 中文翻譯怎麼設定見 [docs/翻譯設定.md](docs/翻譯設定.md)
 """
 
 
@@ -788,10 +962,150 @@ def find_meta(slug: str) -> Path:
 
 
 # --------------------------------------------------------------------------
+# 本機網頁 app
+# --------------------------------------------------------------------------
+
+WEBAPP_DIR = ROOT / "webapp"
+
+
+def problem_payload(dirname: str) -> dict:
+    """單一題目的完整資料：meta + 題目 HTML + 各語言解答檔。"""
+    d = DAILY_DIR / dirname
+    meta_path = d / "meta.json"
+    if not d.is_dir() or not meta_path.exists():
+        raise FileNotFoundError(dirname)
+    meta = json.loads(meta_path.read_text("utf-8"))
+    meta["_dir"] = dirname
+
+    readme = d / "README.md"
+    body = readme.read_text("utf-8") if readme.exists() else ""
+    # 「解題筆記」以後的內容另外拆出來，前端分頁顯示
+    parts = re.split(r"^## 解題筆記\s*$", body, maxsplit=1, flags=re.M)
+
+    solutions = []
+    for f in sorted(d.iterdir()):
+        if f.name.startswith("solution."):
+            solutions.append({"name": f.name, "code": f.read_text("utf-8")})
+
+    return {
+        "meta": meta,
+        "problemHtml": md_to_html(parts[0]),
+        "notesHtml": md_to_html(parts[1]) if len(parts) > 1 else "",
+        "notesMd": parts[1].strip() if len(parts) > 1 else "",
+        "solutions": solutions,
+    }
+
+
+def save_problem(dirname: str, patch: dict) -> dict:
+    """前端改了標籤 / 狀態 / 筆記，寫回 meta.json 與 README。"""
+    d = DAILY_DIR / dirname
+    meta_path = d / "meta.json"
+    meta = json.loads(meta_path.read_text("utf-8"))
+
+    if "userTags" in patch:
+        tags, seen = [], set()
+        for t in patch["userTags"]:
+            t = str(t).strip()
+            if t and t not in seen:
+                seen.add(t)
+                tags.append(t)
+        meta["userTags"] = tags
+    if "status" in patch and patch["status"] in STATUS_ICON:
+        meta["status"] = patch["status"]
+    meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", "utf-8")
+
+    if "notesMd" in patch:
+        readme = d / "README.md"
+        body = readme.read_text("utf-8")
+        head = re.split(r"^## 解題筆記\s*$", body, maxsplit=1, flags=re.M)[0]
+        readme.write_text(head.rstrip() + "\n\n## 解題筆記\n\n"
+                          + patch["notesMd"].strip() + "\n", "utf-8")
+
+    update_index()
+    return problem_payload(dirname)
+
+
+def reveal_in_os(path: Path) -> None:
+    """在 Finder / 檔案總管開啟資料夾，Mac 和 Windows 都通。"""
+    if sys.platform == "darwin":
+        subprocess.run(["open", str(path)], check=False)
+    elif os.name == "nt":
+        subprocess.run(["explorer", str(path)], check=False)
+    else:
+        subprocess.run(["xdg-open", str(path)], check=False)
+
+
+def make_handler():
+    from http.server import SimpleHTTPRequestHandler
+
+    class Handler(SimpleHTTPRequestHandler):
+        def __init__(self, *a, **kw):
+            super().__init__(*a, directory=str(WEBAPP_DIR), **kw)
+
+        def log_message(self, fmt, *args):  # 不要洗畫面
+            pass
+
+        def _json(self, obj, code: int = 200) -> None:
+            data = json.dumps(obj, ensure_ascii=False).encode("utf-8")
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(data)))
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            self.wfile.write(data)
+
+        def do_GET(self):
+            if self.path == "/api/problems":
+                return self._json({
+                    "problems": load_all_meta(),
+                    "root": str(ROOT),
+                    "branch": git("rev-parse", "--abbrev-ref", "HEAD", check=False),
+                })
+            m = re.match(r"^/api/problem/([^/]+)$", self.path)
+            if m:
+                try:
+                    return self._json(problem_payload(unquote(m.group(1))))
+                except FileNotFoundError:
+                    return self._json({"error": "找不到這一題"}, 404)
+            m = re.match(r"^/api/reveal/([^/]+)$", self.path)
+            if m:
+                target = DAILY_DIR / unquote(m.group(1))
+                if target.is_dir():
+                    reveal_in_os(target)
+                    return self._json({"ok": True})
+                return self._json({"error": "找不到資料夾"}, 404)
+            return super().do_GET()
+
+        def do_POST(self):
+            m = re.match(r"^/api/problem/([^/]+)$", self.path)
+            if not m:
+                return self._json({"error": "unknown endpoint"}, 404)
+            try:
+                n = int(self.headers.get("Content-Length") or 0)
+                patch = json.loads(self.rfile.read(n) or b"{}")
+                return self._json(save_problem(unquote(m.group(1)), patch))
+            except FileNotFoundError:
+                return self._json({"error": "找不到這一題"}, 404)
+            except (json.JSONDecodeError, ValueError) as e:
+                return self._json({"error": f"資料有誤：{e}"}, 400)
+
+    return Handler
+
+
+# --------------------------------------------------------------------------
 # 指令
 # --------------------------------------------------------------------------
 
 def cmd_fetch(args) -> None:
+    cfg = load_config()
+    langs = normalize_langs(args.lang, cfg)
+    if args.translate is None:
+        args.translate = cfg.get("translate", "auto")
+    if args.zh is None:
+        args.zh = cfg.get("zh", "tw")
+    if args.site is None:
+        args.site = cfg.get("site", "com")
+
     if args.slug:
         slug = args.slug
         date = args.date or dt.date.today().isoformat()
@@ -819,7 +1133,7 @@ def cmd_fetch(args) -> None:
             git("commit", "-m", "chore: 初始化 LeetCode 每日挑戰工具")
         ensure_branch(branch_name(date, q["slug"]))
 
-    d = write_problem(q, date, args.lang, args.force)
+    d = write_problem(q, date, langs, args.force)
     update_index()
 
     if args.commit:
@@ -859,6 +1173,27 @@ def cmd_done(args) -> None:
     update_index()
 
 
+def cmd_serve(args) -> None:
+    from http.server import ThreadingHTTPServer
+
+    if not (WEBAPP_DIR / "index.html").exists():
+        raise SystemExit(f"找不到 {WEBAPP_DIR / 'index.html'}")
+
+    httpd = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler())
+    url = f"http://127.0.0.1:{httpd.server_address[1]}/"
+    print(f"LeetCode 每日挑戰 → {url}")
+    print("按 Ctrl+C 結束")
+    if not args.no_open:
+        import webbrowser
+        webbrowser.open(url)
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\n已關閉")
+    finally:
+        httpd.server_close()
+
+
 def cmd_list(args) -> None:
     metas = load_all_meta()
     if args.tag:
@@ -882,13 +1217,14 @@ def main() -> None:
     f = sub.add_parser("fetch", help="抓取每日挑戰並建立資料夾 / 分支")
     f.add_argument("--slug", help="指定題目 slug（預設抓今日挑戰）")
     f.add_argument("--date", help="指定歸檔日期 YYYY-MM-DD")
-    f.add_argument("--site", choices=["com", "cn"], default="com",
-                   help="每日挑戰來源站（預設 com）")
-    f.add_argument("--lang", default="python3", help="解答樣板語言（預設 python3）")
-    f.add_argument("--translate", choices=["auto", "cn", "llm", "off"], default="auto",
+    f.add_argument("--site", choices=["com", "cn"], default=None,
+                   help="每日挑戰來源站")
+    f.add_argument("--lang", default=None,
+                   help="解答語言，逗號分隔，可用簡寫（ts,cpp,js）。預設讀 lcconfig.json")
+    f.add_argument("--translate", choices=["auto", "cn", "llm", "off"], default=None,
                    help="翻譯方式：auto=官方翻譯優先、cn=只用官方、llm=只用 Claude、off=不翻")
-    f.add_argument("--zh", choices=["tw", "cn"], default="tw",
-                   help="中文字體用語：tw=台灣繁體（預設）、cn=簡體原樣")
+    f.add_argument("--zh", choices=["tw", "cn"], default=None,
+                   help="中文字體用語：tw=台灣繁體、cn=簡體原樣")
     f.add_argument("--no-branch", action="store_true", help="不要開 / 切分支")
     f.add_argument("--commit", action="store_true", help="抓完自動 commit")
     f.add_argument("--force", action="store_true", help="覆蓋已存在的題目 README")
@@ -907,6 +1243,11 @@ def main() -> None:
     d.add_argument("slug")
     d.add_argument("--status", choices=["todo", "wip", "done"], default="done")
     d.set_defaults(func=cmd_done)
+
+    v = sub.add_parser("serve", help="開啟總覽網頁 app")
+    v.add_argument("--port", type=int, default=8765, help="連接埠（預設 8765）")
+    v.add_argument("--no-open", action="store_true", help="不要自動開瀏覽器")
+    v.set_defaults(func=cmd_serve)
 
     l = sub.add_parser("list", help="列出題目")
     l.add_argument("--tag", help="只列出含此標籤的題目")

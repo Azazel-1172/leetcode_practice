@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LeetCode 每日挑戰</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="topbar-row">
+      <button class="back" id="back" hidden>← 返回總覽</button>
+      <h1 class="brand">LeetCode 每日挑戰</h1>
+      <span class="stats" id="stats"></span>
+      <span class="spacer"></span>
+      <input class="search" id="search" type="search" placeholder="搜尋題號、題名、標籤…">
+    </div>
+
+    <div class="filters" id="filters">
+      <div class="seg" id="statusSeg">
+        <button data-status="all" aria-pressed="true">全部</button>
+        <button data-status="todo" aria-pressed="false">未解</button>
+        <button data-status="wip" aria-pressed="false">進行中</button>
+        <button data-status="done" aria-pressed="false">已解</button>
+      </div>
+      <div class="seg" id="diffSeg">
+        <button data-diff="all" aria-pressed="true">不分難度</button>
+        <button data-diff="Easy" aria-pressed="false">簡單</button>
+        <button data-diff="Medium" aria-pressed="false">中等</button>
+        <button data-diff="Hard" aria-pressed="false">困難</button>
+      </div>
+      <span class="divider"></span>
+      <span class="label">標籤</span>
+      <span id="tagFilters" class="filters" style="margin:0"></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>沒有符合條件的題目</div>
+
+  <section class="detail" id="detail">
+    <div class="detail-head">
+      <span class="qid" id="dQid"></span>
+      <span class="badge" id="dDiff"></span>
+      <span class="stats" id="dDate"></span>
+      <span class="spacer"></span>
+      <a id="dLink" href="#" target="_blank" rel="noopener">在 LeetCode 開啟 ↗</a>
+      <button class="back" id="reveal">開啟資料夾</button>
+    </div>
+    <h1 id="dTitle"></h1>
+    <div class="stats" id="dTitleEn"></div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-panel="p-problem" aria-selected="true">題目</button>
+      <button class="tab" role="tab" data-panel="p-notes" aria-selected="false">筆記與標籤</button>
+      <button class="tab" role="tab" data-panel="p-code" aria-selected="false">解答檔</button>
+    </div>
+
+    <div class="panel on prose" id="p-problem"></div>
+
+    <div class="panel" id="p-notes">
+      <div class="editor">
+        <div class="field">
+          <span class="label">狀態</span>
+          <div class="seg" id="statusEdit">
+            <button data-status="todo">⬜ 未解</button>
+            <button data-status="wip">🟡 進行中</button>
+            <button data-status="done">✅ 已解</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label">我的標籤</span>
+          <div class="taginput" id="tagBox">
+            <input id="tagInput" placeholder="輸入後按 Enter 新增">
+          </div>
+          <span class="label">官方分類：<span id="officialTags"></span></span>
+          <div class="suggest" id="suggest"></div>
+        </div>
+
+        <div class="field">
+          <span class="label">解題筆記（Markdown，會寫回該題的 README.md）</span>
+          <textarea id="notes" spellcheck="false"></textarea>
+        </div>
+
+        <div class="row">
+          <button class="btn" id="save">儲存</button>
+          <button class="btn ghost" id="revert">還原</button>
+          <span class="label" id="saveHint"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-code"></div>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

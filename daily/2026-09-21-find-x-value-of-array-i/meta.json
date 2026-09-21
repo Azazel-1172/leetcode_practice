@@ -1,8 +1,5 @@
 {
-  "userTags": [
-    "前綴和",
-    "模運算"
-  ],
+  "userTags": [],
   "status": "todo",
   "notes": "",
   "id": "3524",
@@ -25,5 +22,10 @@
   "url": "https://leetcode.com/problems/find-x-value-of-array-i/",
   "urlCn": "https://leetcode.cn/problems/find-x-value-of-array-i/",
   "branch": "daily/2026-09-21-find-x-value-of-array-i",
-  "translateSource": "Claude Code"
+  "translateSource": "Claude Code",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
 }
