@@ -132,6 +132,10 @@ async function openProblem(dir) {
   $('dLink').href = m.url || '#';
 
   $('p-problem').innerHTML = data.problemHtml;
+  $('interviewView').innerHTML = data.interviewHtml
+    || '<p class="label">這一題還沒有面試官問答。在 Claude Code 執行 <code>/lc-interview</code> 產生。</p>';
+  $('interview').value = data.interviewMd;
+  $('interviewHint').textContent = '';
   $('notes').value = data.notesMd;
   $('officialTags').textContent = (m.topicTags || []).join('、') || '（無）';
   renderStatusEdit(m.status || 'todo');
@@ -306,6 +310,23 @@ $('tagInput').onkeydown = (e) => {
   }
 };
 $('notes').oninput = markDirty;
+$('interview').oninput = () => { $('interviewHint').textContent = '有未儲存的變更'; };
+$('saveInterview').onclick = async () => {
+  if (!state.current) return;
+  try {
+    const data = await api(`/api/problem/${encodeURIComponent(state.current.meta._dir)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ interviewMd: $('interview').value }),
+    });
+    state.current = data;
+    $('interviewView').innerHTML = data.interviewHtml;
+    $('interviewHint').textContent = '';
+    toast('面試官問答已儲存');
+  } catch (e) {
+    toast(`儲存失敗：${e.message}`);
+  }
+};
 $('save').onclick = save;
 $('revert').onclick = () => {
   if (state.current) { state.dirty = false; openProblem(state.current.meta._dir); }

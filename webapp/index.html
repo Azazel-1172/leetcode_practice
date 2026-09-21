@@ -57,6 +57,7 @@
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" data-panel="p-problem" aria-selected="true">題目</button>
       <button class="tab" role="tab" data-panel="p-notes" aria-selected="false">筆記與標籤</button>
+      <button class="tab" role="tab" data-panel="p-interview" aria-selected="false">面試官問答</button>
       <button class="tab" role="tab" data-panel="p-code" aria-selected="false">解答檔</button>
     </div>
 
@@ -93,6 +94,20 @@
           <span class="label" id="saveHint"></span>
         </div>
       </div>
+    </div>
+
+    <div class="panel" id="p-interview">
+      <div class="prose" id="interviewView"></div>
+      <details class="editor" id="interviewEdit" style="margin-top:20px">
+        <summary class="label" style="cursor:pointer">編輯這一區（Markdown）</summary>
+        <div class="field" style="margin-top:12px">
+          <textarea id="interview" spellcheck="false"></textarea>
+        </div>
+        <div class="row">
+          <button class="btn" id="saveInterview">儲存</button>
+          <span class="label" id="interviewHint"></span>
+        </div>
+      </details>
     </div>
 
     <div class="panel" id="p-code"></div>

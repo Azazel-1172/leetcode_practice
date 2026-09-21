@@ -539,6 +539,19 @@ _RAW_HTML = re.compile(
     r"^\s*</?(?:details|summary|div|br|img|p|hr)\b.*>\s*$", re.I)
 
 
+_TABLE_SEP = re.compile(r"^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$")
+
+
+def _split_row(line: str) -> list[str]:
+    """把 | a | b | c | 切成 [a, b, c]，前後的分隔線不算欄位。"""
+    cells = line.strip().split("|")
+    if cells and not cells[0].strip():
+        cells = cells[1:]
+    if cells and not cells[-1].strip():
+        cells = cells[:-1]
+    return [c.strip() for c in cells]
+
+
 def md_to_html(md: str) -> str:
     """
     把題目 README 的 Markdown 轉成 HTML。
@@ -546,10 +559,12 @@ def md_to_html(md: str) -> str:
     只需要支援 lcdaily 自己產生的那些語法：標題、段落、清單、
     程式碼圍欄、行內標記、引言，以及原樣穿透的 <details> 摺疊區塊。
     """
+    lines_in = md.splitlines()
     out: list[str] = []
     list_stack: list[str] = []   # "ul" / "ol"
     in_code = False
     para: list[str] = []
+    skip_until = -1
 
     def flush_para() -> None:
         if para:
@@ -560,8 +575,32 @@ def md_to_html(md: str) -> str:
         while len(list_stack) > depth:
             out.append(f"</{list_stack.pop()}>")
 
-    for raw in md.splitlines():
+    for idx, raw in enumerate(lines_in):
+        if idx < skip_until:
+            continue
         line = raw.rstrip()
+
+        # 表格：標題列 + 分隔列 + 內容列
+        if (not in_code and "|" in line
+                and idx + 1 < len(lines_in) and _TABLE_SEP.match(lines_in[idx + 1])):
+            flush_para()
+            close_lists()
+            header = _split_row(line)
+            rows = []
+            j = idx + 2
+            while j < len(lines_in) and "|" in lines_in[j] and lines_in[j].strip():
+                rows.append(_split_row(lines_in[j]))
+                j += 1
+            skip_until = j
+            out.append("<table><thead><tr>"
+                       + "".join(f"<th>{_inline(c)}</th>" for c in header)
+                       + "</tr></thead><tbody>")
+            for row in rows:
+                row += [""] * (len(header) - len(row))
+                out.append("<tr>" + "".join(f"<td>{_inline(c)}</td>"
+                                            for c in row[:len(header)]) + "</tr>")
+            out.append("</tbody></table>")
+            continue
 
         if line.lstrip().startswith("```"):
             flush_para()
@@ -748,6 +787,10 @@ def render_problem_md(q: dict, date: str, meta: dict) -> str:
         "",
         "### 踩到的坑",
         "",
+        "",
+        INTERVIEW_HEADING,
+        "",
+        "（解完題後在 Claude Code 執行 `/lc-interview` 產生）",
         "",
     ]
     return "\n".join(lines)
@@ -968,6 +1011,38 @@ def find_meta(slug: str) -> Path:
 WEBAPP_DIR = ROOT / "webapp"
 
 
+NOTES_HEADING = "## 解題筆記"
+INTERVIEW_HEADING = "## 面試官問答"
+
+
+def split_readme(body: str) -> dict:
+    """
+    把題目 README 拆成三塊：題目、解題筆記、面試官問答。
+
+    每一塊都要能單獨改寫而不影響其他塊，所以用下一個 h2 標題當邊界，
+    而不是「某個標題之後的全部內容」。
+    """
+    out = {"problem": body, "notes": "", "interview": ""}
+    pat = re.compile(r"^## (解題筆記|面試官問答)\s*$", re.M)
+    hits = list(pat.finditer(body))
+    if not hits:
+        return out
+    out["problem"] = body[:hits[0].start()]
+    for i, m in enumerate(hits):
+        end = hits[i + 1].start() if i + 1 < len(hits) else len(body)
+        key = "notes" if m.group(1) == "解題筆記" else "interview"
+        out[key] = body[m.end():end].strip()
+    return out
+
+
+def join_readme(parts: dict) -> str:
+    """把三塊組回一份 README，區塊順序固定。"""
+    text = parts["problem"].rstrip() + "\n\n" + NOTES_HEADING + "\n\n" + parts["notes"].strip()
+    if parts["interview"].strip():
+        text += "\n\n" + INTERVIEW_HEADING + "\n\n" + parts["interview"].strip()
+    return text.rstrip() + "\n"
+
+
 def problem_payload(dirname: str) -> dict:
     """單一題目的完整資料：meta + 題目 HTML + 各語言解答檔。"""
     d = DAILY_DIR / dirname
@@ -978,9 +1053,7 @@ def problem_payload(dirname: str) -> dict:
     meta["_dir"] = dirname
 
     readme = d / "README.md"
-    body = readme.read_text("utf-8") if readme.exists() else ""
-    # 「解題筆記」以後的內容另外拆出來，前端分頁顯示
-    parts = re.split(r"^## 解題筆記\s*$", body, maxsplit=1, flags=re.M)
+    parts = split_readme(readme.read_text("utf-8") if readme.exists() else "")
 
     solutions = []
     for f in sorted(d.iterdir()):
@@ -989,9 +1062,11 @@ def problem_payload(dirname: str) -> dict:
 
     return {
         "meta": meta,
-        "problemHtml": md_to_html(parts[0]),
-        "notesHtml": md_to_html(parts[1]) if len(parts) > 1 else "",
-        "notesMd": parts[1].strip() if len(parts) > 1 else "",
+        "problemHtml": md_to_html(parts["problem"]),
+        "notesHtml": md_to_html(parts["notes"]),
+        "notesMd": parts["notes"],
+        "interviewHtml": md_to_html(parts["interview"]),
+        "interviewMd": parts["interview"],
         "solutions": solutions,
     }
 
@@ -1014,12 +1089,13 @@ def save_problem(dirname: str, patch: dict) -> dict:
         meta["status"] = patch["status"]
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", "utf-8")
 
-    if "notesMd" in patch:
+    if "notesMd" in patch or "interviewMd" in patch:
         readme = d / "README.md"
-        body = readme.read_text("utf-8")
-        head = re.split(r"^## 解題筆記\s*$", body, maxsplit=1, flags=re.M)[0]
-        readme.write_text(head.rstrip() + "\n\n## 解題筆記\n\n"
-                          + patch["notesMd"].strip() + "\n", "utf-8")
+        parts = split_readme(readme.read_text("utf-8"))
+        for key, field in (("notes", "notesMd"), ("interview", "interviewMd")):
+            if field in patch:
+                parts[key] = str(patch[field])
+        readme.write_text(join_readme(parts), "utf-8")
 
     update_index()
     return problem_payload(dirname)
