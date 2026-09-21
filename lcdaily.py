@@ -637,16 +637,20 @@ def write_problem(q: dict, date: str, lang: str, force: bool) -> Path:
         "date": date,
         "slug": q["slug"],
         "title": q["title"],
-        "titleZh": q["titleZh"],
         "difficulty": q["difficulty"],
-        "topicTags": q["topicTags"],
         "topicTagsEn": q["topicTagsEn"],
-        "translated": q["translated"],
-        "translateSource": q["translateSource"],
         "url": f"https://leetcode.com/problems/{q['slug']}/",
         "urlCn": f"https://leetcode.cn/problems/{q['slug']}/",
         "branch": branch_name(date, q["slug"]),
     })
+    # 已經翻好的內容不要被沒帶翻譯的重抓蓋掉
+    if q["translated"] or not meta.get("translated"):
+        meta.update({
+            "titleZh": q["titleZh"],
+            "topicTags": q["topicTags"],
+            "translated": q["translated"],
+            "translateSource": q["translateSource"],
+        })
     meta.setdefault("userTags", [])
     meta.setdefault("status", "todo")
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", "utf-8")

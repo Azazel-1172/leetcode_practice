@@ -1,0 +1,29 @@
+{
+  "userTags": [
+    "前綴和",
+    "模運算"
+  ],
+  "status": "todo",
+  "notes": "",
+  "id": "3524",
+  "date": "2026-09-21",
+  "slug": "find-x-value-of-array-i",
+  "title": "Find X Value of Array I",
+  "titleZh": "求陣列的 X 值 I",
+  "difficulty": "Medium",
+  "topicTags": [
+    "陣列",
+    "數學",
+    "動態規劃 DP"
+  ],
+  "topicTagsEn": [
+    "Array",
+    "Math",
+    "Dynamic Programming"
+  ],
+  "translated": true,
+  "url": "https://leetcode.com/problems/find-x-value-of-array-i/",
+  "urlCn": "https://leetcode.cn/problems/find-x-value-of-array-i/",
+  "branch": "daily/2026-09-21-find-x-value-of-array-i",
+  "translateSource": "Claude Code"
+}
