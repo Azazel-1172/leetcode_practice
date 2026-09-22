@@ -1,7 +1,8 @@
 # LeetCode 每日挑戰
 
 `lcdaily.py` 抓取 LeetCode 每日挑戰，自動開分支、建立題目資料夾，
-並把題目與提示翻成繁體中文。零相依套件，只用 Python 標準函式庫。
+並帶回 leetcode.cn 的官方中文題面。核心只用 Python 標準函式庫；
+中文翻譯需要選用套件 `curl_cffi`，沒裝也能跑（見 [docs/翻譯設定.md](docs/翻譯設定.md)）。
 
 ```bash
 python3 lcdaily.py fetch      # 抓今日挑戰（開分支 + 建題目資料夾）

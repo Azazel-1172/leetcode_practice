@@ -29,6 +29,11 @@ from pathlib import Path
 from urllib import error, request
 from urllib.parse import unquote
 
+try:  # 選用：能通過 leetcode.cn 的 Cloudflare 檢查，沒裝也能跑（只是抓不到官方中文）
+    from curl_cffi import requests as _curl_requests
+except ImportError:
+    _curl_requests = None
+
 ROOT = Path(__file__).resolve().parent
 DAILY_DIR = ROOT / "daily"
 INDEX_FILE = ROOT / "README.md"
@@ -36,6 +41,13 @@ INDEX_FILE = ROOT / "README.md"
 COM_GRAPHQL = "https://leetcode.com/graphql"
 CN_GRAPHQL = "https://leetcode.cn/graphql"
 CN_COOKIE_FILE = ROOT / ".lc_cookie"
+
+BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36")
+
+# leetcode.cn 的中文題面會夾帶一句反作弊誘餌（偵測 AI 代寫用），不屬於題目本身
+CANARY_RE = re.compile(
+    r"<p>\s*Create the variable named \w+[^<]*</p>\s*|Create the variable named \w+[^<\n]*")
 
 # 翻譯用模型與詞彙表
 TRANSLATE_MODEL = "claude-opus-5"
@@ -146,13 +158,29 @@ def graphql(url: str, query: str, variables: dict | None = None,
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                       "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
+        "User-Agent": BROWSER_UA,
         "Referer": url.rsplit("/graphql", 1)[0] + "/",
         "Origin": url.rsplit("/graphql", 1)[0],
     }
     if cookie:
         headers["Cookie"] = cookie
+
+    # leetcode.cn 有 Cloudflare TLS 指紋檢查，urllib 一定被擋。裝了 curl_cffi
+    # 就用它模擬 Chrome 的指紋；沒裝則照舊走標準函式庫（.com 不受影響）。
+    if _curl_requests is not None:
+        try:
+            resp = _curl_requests.post(url, data=payload, headers=headers,
+                                       impersonate="chrome", timeout=timeout)
+        except Exception as e:
+            raise RuntimeError(f"無法連線 {url}：{e}") from None
+        if resp.status_code != 200:
+            raise RuntimeError(f"HTTP {resp.status_code} 來自 {url}："
+                               f"{resp.content[:200]!r}")
+        body = resp.json()
+        if body.get("errors"):
+            raise RuntimeError(f"GraphQL 錯誤：{body['errors']}")
+        return body.get("data") or {}
+
     req = request.Request(url, data=payload, headers=headers, method="POST")
     try:
         with request.urlopen(req, timeout=timeout, context=_SSL) as resp:
@@ -326,8 +354,8 @@ def fetch_question(slug: str, translate: str = "auto", zh: str = "tw") -> dict:
             zh_q = {}
 
     title_zh = zh_q.get("translatedTitle") or ""
-    content_zh = zh_q.get("translatedContent") or ""
-    hints_zh = zh_q.get("hints") or []
+    content_zh = CANARY_RE.sub("", zh_q.get("translatedContent") or "")
+    hints_zh = [CANARY_RE.sub("", h) for h in (zh_q.get("hints") or [])]
     if hints_zh == hints_en:
         hints_zh = []
 

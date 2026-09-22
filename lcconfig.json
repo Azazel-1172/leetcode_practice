@@ -1,6 +1,10 @@
 {
-  "langs": ["typescript", "cpp", "javascript"],
-  "translate": "off",
-  "zh": "tw",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ],
+  "translate": "cn",
+  "zh": "cn",
   "site": "com"
 }
