@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3525",
+  "date": "2026-09-22",
+  "slug": "find-x-value-of-array-ii",
+  "title": "Find X Value of Array II",
+  "difficulty": "Hard",
+  "topicTagsEn": [
+    "Array",
+    "Math",
+    "Segment Tree"
+  ],
+  "url": "https://leetcode.com/problems/find-x-value-of-array-ii/",
+  "urlCn": "https://leetcode.cn/problems/find-x-value-of-array-ii/",
+  "branch": "daily/2026-09-22-find-x-value-of-array-ii",
+  "titleZh": "求出数组的 X 值 II",
+  "topicTags": [
+    "线段树",
+    "数组",
+    "数学"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
