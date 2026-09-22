@@ -787,6 +787,13 @@ def render_problem_md(q: dict, date: str, meta: dict) -> str:
 
     lines += ["## 題目", "", body.rstrip(), ""]
 
+    lines += [
+        "## 白話翻譯",
+        "",
+        "（用自己的話重寫一次題目在問什麼：輸入是什麼、每一步要做什麼、答案是什麼）",
+        "",
+    ]
+
     if q["hints"]:
         note = "" if q["hintsTranslated"] else "（中文站未翻譯，以下為英文原文）"
         lines += [f"## 提示 Hints {note}".rstrip(), ""]
