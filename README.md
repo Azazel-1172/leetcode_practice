@@ -32,21 +32,25 @@ python3 lcdaily.py sync                        # 重建本頁總覽
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽
 
-共 **2** 題　|　已解 **1** 題　|　最後更新：2026-09-22
+共 **2** 題　|　已解 **2** 題　|　最後更新：2026-09-22
 
 | 日期 | # | 題目 | 難度 | 狀態 | 標籤 | 連結 |
 |---|---|---|---|---|---|---|
-| 2026-09-22 | 3525 | [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md) | 困難 | ⬜ 未解 | `线段树`、`数组`、`数学` | [LC](https://leetcode.com/problems/find-x-value-of-array-ii/) |
+| 2026-09-22 | 3525 | [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md) | 困難 | ✅ 已解 | `線段樹`、`區間查詢`、`單點修改`、`前綴積`、`取餘數`、`线段树` | [LC](https://leetcode.com/problems/find-x-value-of-array-ii/) |
 | 2026-09-21 | 3524 | [求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md) | 中等 | ✅ 已解 | `滾動陣列`、`取餘數`、`遞推`、`計數陣列`、`陣列`、`數學` | [LC](https://leetcode.com/problems/find-x-value-of-array-i/) |
 
 ## 🏷️ 標籤索引
 
+- **取餘數** (2)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md), [求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **前綴積** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **動態規劃 DP** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
-- **取餘數** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **區間查詢** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
+- **單點修改** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **数学** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **数组** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **數學** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **滾動陣列** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **線段樹** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **线段树** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **計數陣列** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **遞推** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
