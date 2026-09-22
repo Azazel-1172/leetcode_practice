@@ -49,6 +49,11 @@ BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.3
 CANARY_RE = re.compile(
     r"<p>\s*Create the variable named \w+[^<]*</p>\s*|Create the variable named \w+[^<\n]*")
 
+# 範例裡的陣列字面值（[1,2,3] / [[1,2],[3,4]]）要包成行內程式碼，否則：
+#   · [..][..] 會被當成參照式連結 [文字][參照]，外層括號被吃掉
+#   · 反斜線跳脫的 \[ \] 在支援 KaTeX 的渲染器裡會變成行間公式分隔符
+ARRAY_LITERAL_RE = re.compile(r"""\[(?:[0-9,\s"'.+-]|\[[0-9,\s"'.+-]*\])*\]""")
+
 # 翻譯用模型與詞彙表
 TRANSLATE_MODEL = "claude-opus-5"
 GLOSSARY = """陣列 array、字串 string、雜湊表 hash table、堆疊 stack、佇列 queue、
@@ -525,6 +530,8 @@ class _Html2Md(HTMLParser):
         text = "".join(self.out)
         if data == " " and (not text or text.endswith((" ", "\n"))):
             return
+        if not self.in_code:
+            data = ARRAY_LITERAL_RE.sub(r"`\g<0>`", data)
         self.w(data)
 
 
