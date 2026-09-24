@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3550",
+  "date": "2026-09-24",
+  "slug": "smallest-index-with-digit-sum-equal-to-index",
+  "title": "Smallest Index With Digit Sum Equal to Index",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Array",
+    "Math"
+  ],
+  "url": "https://leetcode.com/problems/smallest-index-with-digit-sum-equal-to-index/",
+  "urlCn": "https://leetcode.cn/problems/smallest-index-with-digit-sum-equal-to-index/",
+  "branch": "daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index",
+  "titleZh": "数位和等于下标的最小下标",
+  "topicTags": [
+    "数组",
+    "数学"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
