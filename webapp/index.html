@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LeetCode 每日挑戰</title>
+<meta name="theme-color" content="#2f6fe4">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -49,7 +52,7 @@
       <span class="stats" id="dDate"></span>
       <span class="spacer"></span>
       <a id="dLink" href="#" target="_blank" rel="noopener">在 LeetCode 開啟 ↗</a>
-      <button class="back" id="reveal">開啟資料夾</button>
+      <button class="back edit-only" id="reveal">開啟資料夾</button>
     </div>
     <h1 id="dTitle"></h1>
     <div class="stats" id="dTitleEn"></div>
@@ -64,7 +67,8 @@
     <div class="panel on prose" id="p-problem"></div>
 
     <div class="panel" id="p-notes">
-      <div class="editor">
+      <div class="prose static-only" id="notesView"></div>
+      <div class="editor edit-only">
         <div class="field">
           <span class="label">狀態</span>
           <div class="seg" id="statusEdit">
@@ -98,7 +102,7 @@
 
     <div class="panel" id="p-interview">
       <div class="prose" id="interviewView"></div>
-      <details class="editor" id="interviewEdit" style="margin-top:20px">
+      <details class="editor edit-only" id="interviewEdit" style="margin-top:20px">
         <summary class="label" style="cursor:pointer">編輯這一區（Markdown）</summary>
         <div class="field" style="margin-top:12px">
           <textarea id="interview" spellcheck="false"></textarea>

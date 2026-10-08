@@ -22,12 +22,15 @@ python3 lcdaily.py tag two-sum 雜湊表 雙指標    # 加自訂標籤
 python3 lcdaily.py done two-sum                # 標記已解
 python3 lcdaily.py list --tag 遞迴             # 依標籤找題目
 python3 lcdaily.py sync                        # 重建本頁總覽
+python3 lcdaily.py build-site                  # 輸出手機版唯讀網站到 _site/
+python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / Discord）
 ```
 
 </details>
 
 - 解題語言、翻譯方式等預設值改 [`lcconfig.json`](lcconfig.json)
 - 中文翻譯怎麼設定見 [docs/翻譯設定.md](docs/翻譯設定.md)
+- 每天自動抓題 + 手機推播見 [docs/手機推播設定.md](docs/手機推播設定.md)
 
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽

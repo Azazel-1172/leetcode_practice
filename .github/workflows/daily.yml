@@ -1,0 +1,59 @@
+name: 每日挑戰
+
+on:
+  schedule:
+    - cron: '5 0 * * *'   # 台灣 08:05（LeetCode 每日題在 UTC 00:00 換題）
+  workflow_dispatch:       # 在 Actions 頁面手動觸發，測試用
+  push:                    # 本機合併筆記 / 解答回 main 後，重建手機版網站
+    branches: [main]
+    paths: ['daily/**', 'webapp/**', 'lcdaily.py']
+
+permissions:
+  contents: write   # commit 今日題目
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily
+  cancel-in-progress: false
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # 免費：用 curl_cffi 模擬瀏覽器 TLS 指紋，直接抓 leetcode.cn 官方翻譯（不需要 cookie）
+      - run: pip install curl_cffi
+
+      - name: 抓今日題目並 commit
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 lcdaily.py fetch --no-branch --commit
+          git pull --rebase
+          git push
+
+      - run: python3 lcdaily.py build-site --out _site
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: 推播
+        if: github.event_name != 'push'
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python3 lcdaily.py notify --site-url "${{ steps.deploy.outputs.page_url }}"

@@ -3,6 +3,9 @@
 const DIFF_ZH = { Easy: '簡單', Medium: '中等', Hard: '困難' };
 const STATUS_ZH = { todo: '⬜ 未解', wip: '🟡 進行中', done: '✅ 已解' };
 
+// build-site 輸出的唯讀靜態站（GitHub Pages / 手機 PWA）會帶這個標記
+const STATIC = document.documentElement.dataset.mode === 'static';
+
 const $ = (id) => document.getElementById(id);
 const state = {
   problems: [],
@@ -24,8 +27,16 @@ function toast(msg) {
   toast._t = setTimeout(() => el.classList.remove('on'), 2200);
 }
 
+/** 靜態站沒有後端，改讀 build-site 預先產生的 JSON（相對路徑，Pages 子路徑也能用） */
+function staticPath(path) {
+  if (path === '/api/problems') return 'data/problems.json';
+  const m = path.match(/^\/api\/problem\/(.+)$/);
+  if (m) return `data/problem/${m[1]}.json`;
+  throw new Error('唯讀模式不支援這個操作');
+}
+
 async function api(path, opts) {
-  const res = await fetch(path, opts);
+  const res = await fetch(STATIC ? staticPath(path) : path, opts);
   const data = await res.json().catch(() => ({ error: '回應不是合法的 JSON' }));
   if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
   return data;
@@ -143,12 +154,23 @@ async function openProblem(dir) {
   renderSuggest();
   renderCode(data.solutions);
   $('saveHint').textContent = '';
+  if (STATIC) renderNotesView(data);
 
   document.body.classList.add('viewing');
   $('back').hidden = false;
   selectTab('p-problem');
   location.hash = encodeURIComponent(dir);
   window.scrollTo(0, 0);
+}
+
+/** 唯讀模式的「筆記與標籤」：只顯示，不給編輯 */
+function renderNotesView(data) {
+  const m = data.meta;
+  const mine = (m.userTags || []).map((t) => `<span class="tag mine">${escapeHtml(t)}</span>`);
+  $('notesView').innerHTML = `
+    <p><strong>狀態</strong>　${STATUS_ZH[m.status || 'todo']}</p>
+    <p><strong>我的標籤</strong>　${mine.join(' ') || '<span class="label">（無）</span>'}</p>
+    ${data.notesHtml || '<p class="label">還沒有筆記。</p>'}`;
 }
 
 function closeProblem() {
@@ -253,7 +275,7 @@ function markDirty() {
 }
 
 async function save() {
-  if (!state.current) return;
+  if (!state.current || STATIC) return;
   const dir = state.current.meta._dir;
   const status = [...$('statusEdit').children]
     .find((b) => b.getAttribute('aria-pressed') === 'true')?.dataset.status || 'todo';
@@ -349,6 +371,15 @@ document.addEventListener('keydown', (e) => {
 window.onbeforeunload = (e) => { if (state.dirty) { e.preventDefault(); return ''; } };
 
 /* ---------- 啟動 ---------- */
+
+if (STATIC && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+// 已經開著 PWA 時點推播，只會改 hash，不會重新載入
+window.addEventListener('hashchange', () => {
+  const dir = decodeURIComponent(location.hash.slice(1));
+  if (dir && dir !== state.current?.meta._dir) openProblem(dir).catch(() => {});
+});
 
 loadList()
   .then(() => {
