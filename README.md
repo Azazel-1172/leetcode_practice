@@ -32,10 +32,11 @@ python3 lcdaily.py sync                        # 重建本頁總覽
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽
 
-共 **6** 題　|　已解 **2** 題　|　最後更新：2026-10-06
+共 **7** 題　|　已解 **2** 題　|　最後更新：2026-10-08
 
 | 日期 | # | 題目 | 難度 | 狀態 | 標籤 | 連結 |
 |---|---|---|---|---|---|---|
+| 2026-10-08 | 1021 | [删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md) | 簡單 | ⬜ 未解 | `栈`、`字符串`、`Bracket Sequences` | [LC](https://leetcode.com/problems/remove-outermost-parentheses/) |
 | 2026-10-06 | 921 | [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md) | 中等 | ⬜ 未解 | `栈`、`贪心`、`字符串`、`Bracket Sequences` | [LC](https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/) |
 | 2026-10-05 | 856 | [括号的分数](daily/2026-10-05-score-of-parentheses/README.md) | 中等 | ⬜ 未解 | `栈`、`字符串`、`Bracket Sequences` | [LC](https://leetcode.com/problems/score-of-parentheses/) |
 | 2026-09-24 | 3550 | [数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md) | 簡單 | ⬜ 未解 | `数组`、`数学` | [LC](https://leetcode.com/problems/smallest-index-with-digit-sum-equal-to-index/) |
@@ -45,12 +46,12 @@ python3 lcdaily.py sync                        # 重建本頁總覽
 
 ## 🏷️ 標籤索引
 
+- **Bracket Sequences** (3)：[删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
+- **字符串** (3)：[删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
 - **数组** (3)：[数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md), [将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
-- **Bracket Sequences** (2)：[使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
+- **栈** (3)：[删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
 - **取餘數** (2)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md), [求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
-- **字符串** (2)：[使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
 - **数学** (2)：[数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
-- **栈** (2)：[使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
 - **二分查找** (1)：[将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
 - **前綴積** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **前缀和** (1)：[将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
