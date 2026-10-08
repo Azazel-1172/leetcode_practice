@@ -11,8 +11,9 @@ const state = {
   problems: [],
   status: 'all',
   diff: 'all',
-  tags: new Set(),
+  tag: '',           // 一次只篩一個標籤（仿 LeetCode App 的標籤頁）
   q: '',
+  catalog: new Map(),  // 英文官方標籤 -> { group, zh }，來自 tags.json
   current: null,   // 目前檢視的題目 payload
   dirty: false,
 };
@@ -42,15 +43,57 @@ async function api(path, opts) {
   return data;
 }
 
-const allTagsOf = (m) => [...(m.userTags || []), ...(m.topicTags || [])];
+/* ---------- 標籤分類 ---------- */
+
+const TAG_GROUPS = ['資料結構', '演算法', '其他', '我的標籤'];
+
+function setCatalog(raw) {
+  state.catalog = new Map();
+  state.alias = new Map();  // 中文名 / 英文名（小寫）-> 官方英文名
+  for (const [group, tags] of Object.entries(raw || {})) {
+    for (const [en, zh] of Object.entries(tags)) {
+      state.catalog.set(en, { group, zh });
+      state.alias.set(zh, en);
+      state.alias.set(en.toLowerCase(), en);
+    }
+  }
+}
+
+/** 官方標籤顯示 LeetCode 英文原名，依 tags.json 分類排序；沒收錄的歸「其他」 */
+function officialTagsOf(m) {
+  const en = m.topicTagsEn || [];
+  const list = en.length
+    ? en.map((t) => ({ group: '其他', ...state.catalog.get(t), name: t }))
+    : (m.topicTags || []).map((t) => ({ group: '其他', name: t }));
+  const seen = new Set();
+  return list
+    .filter((t) => !seen.has(t.name) && seen.add(t.name))
+    .sort((a, b) => TAG_GROUPS.indexOf(a.group) - TAG_GROUPS.indexOf(b.group));
+}
+
+/** 自訂標籤若就是某個官方標籤（例如「線段樹」= Segment Tree），併入官方標籤，不重複列出 */
+function tagsOf(m) {
+  const out = officialTagsOf(m);
+  const names = new Set(out.map((t) => t.name));
+  for (const name of m.userTags || []) {
+    const en = state.alias?.get(name) || state.alias?.get(name.toLowerCase());
+    const t = en ? { ...state.catalog.get(en), name: en } : { group: '我的標籤', name };
+    if (!names.has(t.name)) { names.add(t.name); out.push(t); }
+  }
+  return out.sort((a, b) => TAG_GROUPS.indexOf(a.group) - TAG_GROUPS.indexOf(b.group));
+}
+
+const allTagsOf = (m) => tagsOf(m).map((t) => t.name);
+const STATUS_ICON = { done: '✓', wip: '◐', todo: '—' };
 
 /* ---------- 總覽 ---------- */
 
 async function loadList() {
   const data = await api('/api/problems');
   state.problems = data.problems;
+  setCatalog(data.tagCatalog);
   renderStats();
-  renderTagFilters();
+  renderPills();
   renderGrid();
 }
 
@@ -59,37 +102,158 @@ function renderStats() {
   const done = state.problems.filter((p) => p.status === 'done').length;
   const wip = state.problems.filter((p) => p.status === 'wip').length;
   $('stats').textContent = `共 ${n} 題 · 已解 ${done} · 進行中 ${wip}`;
+  renderHero();
 }
 
-function renderTagFilters() {
-  const counts = new Map();
+/** 標籤頁標題區（仿 LeetCode App）：大 icon、名稱、分類與題數 */
+function renderHero() {
+  const hero = $('tagHero');
+  hero.hidden = !state.tag;
+  if (!state.tag) return;
+  const info = state.problems.flatMap(tagsOf).find((t) => t.name === state.tag)
+    || { group: '我的標籤', name: state.tag };
+  $('heroIcon').replaceChildren(tagIcon(info.name, info.group === '我的標籤'));
+  $('heroName').textContent = info.name;
+  const n = state.problems.filter((p) => allTagsOf(p).includes(state.tag)).length;
+  $('heroSub').textContent = `${info.group}${info.zh ? ` · ${info.zh}` : ''} · ${n} 題`;
+}
+
+/* ---------- 篩選（仿 LeetCode App：一排 pill，點開從底部滑出面板） ---------- */
+
+const STATUS_OPTS = [['todo', '未解'], ['wip', '進行中'], ['done', '已解']];
+const DIFF_OPTS = [['Easy', '簡單'], ['Medium', '中等'], ['Hard', '困難']];
+const SHEET_TITLE = { status: '狀態', diff: '難度', tags: '標籤' };
+
+function renderPills() {
+  for (const b of $('filters').querySelectorAll('.pill')) {
+    const f = b.dataset.filter;
+    let label = SHEET_TITLE[f];
+    let on = false;
+    if (f === 'status' && state.status !== 'all') {
+      label = STATUS_OPTS.find((o) => o[0] === state.status)[1]; on = true;
+    } else if (f === 'diff' && state.diff !== 'all') {
+      label = DIFF_ZH[state.diff]; on = true;
+    } else if (f === 'tags' && state.tag) {
+      label = state.tag; on = true;
+    }
+    b.textContent = label;
+    b.classList.toggle('on', on);
+  }
+  $('clearFilters').hidden = state.status === 'all' && state.diff === 'all' && !state.tag;
+}
+
+let sheetKind = null;
+
+function openSheet(kind) {
+  sheetKind = kind;
+  $('sheetTitle').textContent = SHEET_TITLE[kind];
+  renderSheet();
+  $('sheetBackdrop').hidden = false;
+  requestAnimationFrame(() => $('sheetBackdrop').classList.add('on'));
+}
+
+function closeSheet() {
+  $('sheetBackdrop').classList.remove('on');
+  setTimeout(() => { $('sheetBackdrop').hidden = true; }, 200);
+  sheetKind = null;
+}
+
+function applyFilters() {
+  renderPills();
+  renderHero();
+  renderGrid();
+  if (sheetKind) renderSheet();
+}
+
+function renderSheet() {
+  const body = $('sheetBody');
+  body.replaceChildren();
+
+  if (sheetKind === 'status' || sheetKind === 'diff') {
+    const key = sheetKind;
+    const opts = key === 'status' ? STATUS_OPTS : DIFF_OPTS;
+    const list = document.createElement('div');
+    list.className = 'opt-list';
+    for (const [value, label] of [['all', '全部'], ...opts]) {
+      const b = document.createElement('button');
+      b.className = `opt${key === 'diff' && value !== 'all' ? ` t-${value}` : ''}`;
+      b.setAttribute('aria-pressed', state[key] === value);
+      b.innerHTML = `<span>${label}</span><span class="check">✓</span>`;
+      b.onclick = () => { state[key] = value; applyFilters(); closeSheet(); };
+      list.append(b);
+    }
+    body.append(list);
+    return;
+  }
+
+  // 標籤：仿 LeetCode App 的 Knowledge 列表，依分類分組；點一下直接進該標籤頁
+  const groups = new Map(TAG_GROUPS.map((g) => [g, new Map()]));
   for (const p of state.problems) {
-    for (const t of new Set(allTagsOf(p))) counts.set(t, (counts.get(t) || 0) + 1);
+    const seen = new Set();
+    for (const t of tagsOf(p)) {
+      if (seen.has(t.name)) continue;
+      seen.add(t.name);
+      const g = groups.get(t.group);
+      g.set(t.name, (g.get(t.name) || 0) + 1);
+    }
   }
-  const sorted = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh-Hant'));
-  const box = $('tagFilters');
-  box.replaceChildren();
-  for (const [tag, count] of sorted) {
-    const b = document.createElement('button');
-    b.className = 'chip';
-    b.setAttribute('aria-pressed', state.tags.has(tag));
-    b.innerHTML = `${escapeHtml(tag)}<span class="count">${count}</span>`;
-    b.onclick = () => {
-      state.tags.has(tag) ? state.tags.delete(tag) : state.tags.add(tag);
-      renderTagFilters();
-      renderGrid();
-    };
-    box.append(b);
+  for (const [group, counts] of groups) {
+    if (!counts.size) continue;
+    const sec = document.createElement('section');
+    sec.className = 'sheet-sec';
+    sec.innerHTML = `<h3>${group}</h3>`;
+    const sorted = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh-Hant'));
+    for (const [tag, count] of sorted) {
+      const b = document.createElement('button');
+      b.className = 'tag-row';
+      b.setAttribute('aria-pressed', state.tag === tag);
+      b.append(tagIcon(tag, group === '我的標籤'));
+      b.insertAdjacentHTML('beforeend', `
+        <span class="tag-row-main">
+          <span class="tag-row-name">${escapeHtml(tag)}</span>
+          <span class="tag-row-sub">${count} 題</span>
+        </span>
+        <span class="check">✓</span>`);
+      b.onclick = () => {
+        state.tag = state.tag === tag ? '' : tag;
+        closeSheet();
+        applyFilters();
+        window.scrollTo(0, 0);
+      };
+      sec.append(b);
+    }
+    body.append(sec);
   }
+}
+
+/* LeetCode 官方 API（questionTopicTags.imgUrl）提供的標籤圖示，直接引用不另存 */
+const ICON_SLUG = { 'Graph Theory': 'graph' };
+
+function tagIcon(name, mine) {
+  const fallback = () => {
+    const el = document.createElement('span');
+    el.className = 'tag-icon fallback';
+    el.textContent = '#';
+    return el;
+  };
+  if (mine) return fallback();
+  const img = document.createElement('img');
+  img.className = 'tag-icon';
+  img.alt = '';
+  img.loading = 'lazy';
+  const slug = ICON_SLUG[name] || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  img.src = `https://assets.leetcode.com/favorite/problemset/${slug}.png`;
+  img.onerror = () => img.replaceWith(fallback());
+  return img;
 }
 
 function matches(p) {
   if (state.status !== 'all' && (p.status || 'todo') !== state.status) return false;
   if (state.diff !== 'all' && p.difficulty !== state.diff) return false;
-  // 多個標籤取交集
-  for (const t of state.tags) if (!allTagsOf(p).includes(t)) return false;
+  if (state.tag && !allTagsOf(p).includes(state.tag)) return false;
   if (state.q) {
-    const hay = [p.id, p.title, p.titleZh, p.slug, ...allTagsOf(p)].join(' ').toLowerCase();
+    const hay = [p.id, p.title, p.titleZh, p.slug, ...allTagsOf(p),
+      ...(p.topicTags || []), ...officialTagsOf(p).map((t) => t.zh || '')].join(' ').toLowerCase();
     if (!hay.includes(state.q)) return false;
   }
   return true;
@@ -102,22 +266,23 @@ function renderGrid() {
   $('empty').hidden = list.length > 0;
 
   for (const p of list) {
-    const card = document.createElement('button');
-    card.className = 'card';
-    const mine = (p.userTags || []).map((t) => `<span class="tag mine">${escapeHtml(t)}</span>`);
-    const topic = (p.topicTags || []).map((t) => `<span class="tag">${escapeHtml(t)}</span>`);
-    card.innerHTML = `
-      <div class="card-top">
-        <span class="qid">${escapeHtml(p.id || '')}</span>
-        <span class="badge d-${p.difficulty}">${DIFF_ZH[p.difficulty] || p.difficulty}</span>
-        <span class="spacer"></span>
-        <span class="status">${STATUS_ZH[p.status] || ''}</span>
-      </div>
-      <h2 class="card-title">${escapeHtml(p.titleZh || p.title)}</h2>
-      <div class="tags">${[...mine, ...topic].join('')}</div>
-      <div class="card-foot"><span>${escapeHtml(p.date || '')}</span></div>`;
-    card.onclick = () => openProblem(p._dir);
-    grid.append(card);
+    const row = document.createElement('button');
+    row.className = 'qrow';
+    const status = p.status || 'todo';
+    const meta = [escapeHtml(p.date || ''),
+      ...tagsOf(p).map((t) => t.group === '我的標籤'
+        ? `<span class="mine">${escapeHtml(t.name)}</span>` : escapeHtml(t.name))];
+    row.innerHTML = `
+      <span class="qrow-side">
+        <span class="qrow-diff t-${p.difficulty}">${DIFF_ZH[p.difficulty] || p.difficulty}</span>
+        <span class="qrow-status s-${status}" title="${STATUS_ZH[status]}">${STATUS_ICON[status]}</span>
+      </span>
+      <span class="qrow-main">
+        <span class="qrow-title">${escapeHtml(p.id || '')}. ${escapeHtml(p.titleZh || p.title)}</span>
+        <span class="qrow-meta">${meta.join(' · ')}</span>
+      </span>`;
+    row.onclick = () => openProblem(p._dir);
+    grid.append(row);
   }
 }
 
@@ -148,7 +313,7 @@ async function openProblem(dir) {
   $('interview').value = data.interviewMd;
   $('interviewHint').textContent = '';
   $('notes').value = data.notesMd;
-  $('officialTags').textContent = (m.topicTags || []).join('、') || '（無）';
+  $('officialTags').textContent = officialTagsOf(m).map((t) => t.name).join(', ') || '（無）';
   renderStatusEdit(m.status || 'todo');
   renderTagChips(m.userTags || []);
   renderSuggest();
@@ -235,7 +400,9 @@ function renderSuggest() {
   for (const p of state.problems) {
     for (const t of p.userTags || []) if (!used.has(t)) pool.set(t, (pool.get(t) || 0) + 1);
   }
-  for (const t of state.current?.meta.topicTags || []) if (!used.has(t)) pool.set(t, pool.get(t) || 0);
+  for (const { name: t } of officialTagsOf(state.current?.meta || {})) {
+    if (!used.has(t)) pool.set(t, pool.get(t) || 0);
+  }
 
   const box = $('suggest');
   box.replaceChildren();
@@ -300,20 +467,15 @@ async function save() {
 
 $('search').oninput = (e) => { state.q = e.target.value.trim().toLowerCase(); renderGrid(); };
 
-for (const b of $('statusSeg').children) {
-  b.onclick = () => {
-    state.status = b.dataset.status;
-    for (const x of $('statusSeg').children) x.setAttribute('aria-pressed', x === b);
-    renderGrid();
-  };
+for (const b of $('filters').querySelectorAll('.pill')) {
+  b.onclick = () => openSheet(b.dataset.filter);
 }
-for (const b of $('diffSeg').children) {
-  b.onclick = () => {
-    state.diff = b.dataset.diff;
-    for (const x of $('diffSeg').children) x.setAttribute('aria-pressed', x === b);
-    renderGrid();
-  };
-}
+$('clearFilters').onclick = () => {
+  state.status = 'all'; state.diff = 'all'; state.tag = '';
+  applyFilters();
+};
+$('heroBack').onclick = () => { state.tag = ''; applyFilters(); };
+$('sheetBackdrop').onclick = (e) => { if (e.target === e.currentTarget) closeSheet(); };
 for (const b of $('statusEdit').children) {
   b.onclick = () => { renderStatusEdit(b.dataset.status); markDirty(); };
 }
@@ -364,6 +526,7 @@ $('reveal').onclick = async () => {
 document.addEventListener('keydown', (e) => {
   const typing = /^(INPUT|TEXTAREA)$/.test(e.target.tagName);
   if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); save(); return; }
+  if (e.key === 'Escape' && sheetKind) { closeSheet(); return; }
   if (e.key === 'Escape' && state.current && !typing) closeProblem();
   if (e.key === '/' && !typing) { e.preventDefault(); $('search').focus(); }
 });

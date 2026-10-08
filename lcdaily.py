@@ -453,16 +453,18 @@ class _Html2Md(HTMLParser):
         elif tag == "br":
             self.w("  \n" if not self.in_pre else "\n")
         elif tag in ("strong", "b"):
-            self.w("**")
+            self.w("<strong>" if self.in_pre else "**")
         elif tag in ("em", "i"):
-            self.w("*")
+            self.w("<em>" if self.in_pre else "*")
         elif tag == "code":
             if not self.in_pre:
                 self.w("`")
             self.in_code += 1
         elif tag == "pre":
+            # 示例區塊保留成 HTML <pre>：放進 ``` 圍欄的話 <strong> 會變成字面上的 **，
+            # 而 <pre><strong> 在 GitHub、VS Code 預覽、網頁 app 都能正確顯示粗體
             self.nl(2)
-            self.w("```\n")
+            self.w("<pre>")
             self.in_pre += 1
         elif tag in ("ul", "ol"):
             self.nl(2)
@@ -498,17 +500,17 @@ class _Html2Md(HTMLParser):
         elif tag == "p":
             self.nl(2)
         elif tag in ("strong", "b"):
-            self.w("**")
+            self.w("</strong>" if self.in_pre else "**")
         elif tag in ("em", "i"):
-            self.w("*")
+            self.w("</em>" if self.in_pre else "*")
         elif tag == "code":
             self.in_code = max(0, self.in_code - 1)
             if not self.in_pre:
                 self.w("`")
         elif tag == "pre":
             self.in_pre = max(0, self.in_pre - 1)
-            self.nl(1)
-            self.w("```")
+            self.out[-1] = self.out[-1].rstrip()
+            self.w("</pre>")
             self.nl(2)
         elif tag in ("ul", "ol"):
             if self.list_stack:
@@ -525,7 +527,9 @@ class _Html2Md(HTMLParser):
         if self.skip:
             return
         if self.in_pre:
-            self.w(data)
+            if self.out and self.out[-1] == "<pre>":
+                data = data.lstrip("\n")
+            self.w(_esc(data))
             return
         data = re.sub(r"[ \t\r\n]+", " ", data)
         if not data:
@@ -601,6 +605,7 @@ def md_to_html(md: str) -> str:
     out: list[str] = []
     list_stack: list[str] = []   # "ul" / "ol"
     in_code = False
+    code_lang, code_buf = "", []
     para: list[str] = []
     skip_until = -1
 
@@ -640,17 +645,29 @@ def md_to_html(md: str) -> str:
             out.append("</tbody></table>")
             continue
 
+        # 題目示例：抓題時保留成 HTML <pre>（見 _Html2Md），整塊原樣穿透
+        if not in_code and line.lstrip().startswith("<pre>"):
+            flush_para()
+            close_lists()
+            j = idx
+            while j < len(lines_in) - 1 and "</pre>" not in lines_in[j]:
+                j += 1
+            skip_until = j + 1
+            block = "\n".join(lines_in[idx:j + 1]).strip()
+            out.append(block.replace("<pre>", '<pre class="example">', 1))
+            continue
+
         if line.lstrip().startswith("```"):
             flush_para()
             if in_code:
-                out.append("</code></pre>")
+                out.append(_code_block(code_lang, code_buf))
             else:
                 close_lists()
-                out.append("<pre><code>")
+                code_lang, code_buf = line.lstrip()[3:].strip(), []
             in_code = not in_code
             continue
         if in_code:
-            out.append(_esc(raw))
+            code_buf.append(raw)
             continue
 
         if not line.strip():
@@ -697,8 +714,17 @@ def md_to_html(md: str) -> str:
     flush_para()
     close_lists()
     if in_code:
-        out.append("</code></pre>")
+        out.append(_code_block(code_lang, code_buf))
     return "\n".join(out)
+
+
+def _code_block(lang: str, lines: list[str]) -> str:
+    """程式碼圍欄 -> <pre><code>，去掉頭尾空行。"""
+    while lines and not lines[0].strip():
+        lines = lines[1:]
+    while lines and not lines[-1].strip():
+        lines = lines[:-1]
+    return f"<pre><code>{_esc(chr(10).join(lines))}</code></pre>"
 
 
 # --------------------------------------------------------------------------
@@ -1054,6 +1080,19 @@ def find_meta(slug: str) -> Path:
 # --------------------------------------------------------------------------
 
 WEBAPP_DIR = ROOT / "webapp"
+TAGS_FILE = ROOT / "tags.json"
+
+
+def load_tag_catalog() -> dict:
+    """官方標籤分類（資料結構 / 演算法 / 其他），給網頁 app 篩選與顯示用。"""
+    if not TAGS_FILE.exists():
+        return {}
+    try:
+        cat = json.loads(TAGS_FILE.read_text("utf-8"))
+    except json.JSONDecodeError as e:
+        print(f"! {TAGS_FILE.name} 格式有誤，略過標籤分類：{e}", file=sys.stderr)
+        return {}
+    return {k: v for k, v in cat.items() if not k.startswith("_")}
 
 
 NOTES_HEADING = "## 解題筆記"
@@ -1179,6 +1218,7 @@ def make_handler():
             if self.path == "/api/problems":
                 return self._json({
                     "problems": load_all_meta(),
+                    "tagCatalog": load_tag_catalog(),
                     "root": str(ROOT),
                     "branch": git("rev-parse", "--abbrev-ref", "HEAD", check=False),
                 })
@@ -1336,7 +1376,8 @@ def cmd_build_site(args) -> None:
     data.mkdir(parents=True)
     metas = load_all_meta()
     (out / "data" / "problems.json").write_text(
-        json.dumps({"problems": metas}, ensure_ascii=False), "utf-8")
+        json.dumps({"problems": metas, "tagCatalog": load_tag_catalog()},
+                   ensure_ascii=False), "utf-8")
     for m in metas:
         (data / f"{m['_dir']}.json").write_text(
             json.dumps(problem_payload(m["_dir"]), ensure_ascii=False), "utf-8")

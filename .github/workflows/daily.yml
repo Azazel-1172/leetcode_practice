@@ -6,7 +6,7 @@ on:
   workflow_dispatch:       # 在 Actions 頁面手動觸發，測試用
   push:                    # 本機合併筆記 / 解答回 main 後，重建手機版網站
     branches: [main]
-    paths: ['daily/**', 'webapp/**', 'lcdaily.py']
+    paths: ['daily/**', 'webapp/**', 'lcdaily.py', 'tags.json']
 
 permissions:
   contents: write   # commit 今日題目

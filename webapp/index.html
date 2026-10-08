@@ -21,28 +21,23 @@
       <input class="search" id="search" type="search" placeholder="搜尋題號、題名、標籤…">
     </div>
 
-    <div class="filters" id="filters">
-      <div class="seg" id="statusSeg">
-        <button data-status="all" aria-pressed="true">全部</button>
-        <button data-status="todo" aria-pressed="false">未解</button>
-        <button data-status="wip" aria-pressed="false">進行中</button>
-        <button data-status="done" aria-pressed="false">已解</button>
-      </div>
-      <div class="seg" id="diffSeg">
-        <button data-diff="all" aria-pressed="true">不分難度</button>
-        <button data-diff="Easy" aria-pressed="false">簡單</button>
-        <button data-diff="Medium" aria-pressed="false">中等</button>
-        <button data-diff="Hard" aria-pressed="false">困難</button>
-      </div>
-      <span class="divider"></span>
-      <span class="label">標籤</span>
-      <span id="tagFilters" class="filters" style="margin:0"></span>
+    <div class="pills" id="filters">
+      <button class="pill" data-filter="status">狀態</button>
+      <button class="pill" data-filter="diff">難度</button>
+      <button class="pill" data-filter="tags">標籤</button>
+      <button class="pill-clear" id="clearFilters" hidden>清除</button>
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="grid" id="grid"></div>
+  <section class="tag-hero" id="tagHero" hidden>
+    <button class="hero-back" id="heroBack">← 全部題目</button>
+    <div class="hero-icon" id="heroIcon"></div>
+    <h2 class="hero-name" id="heroName"></h2>
+    <div class="hero-sub" id="heroSub"></div>
+  </section>
+  <div class="qlist" id="grid"></div>
   <div class="empty" id="empty" hidden>沒有符合條件的題目</div>
 
   <section class="detail" id="detail">
@@ -117,6 +112,16 @@
     <div class="panel" id="p-code"></div>
   </section>
 </main>
+
+<div class="sheet-backdrop" id="sheetBackdrop" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head">
+      <h2 id="sheetTitle"></h2>
+    </div>
+    <div class="sheet-body" id="sheetBody"></div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 <script src="app.js"></script>
