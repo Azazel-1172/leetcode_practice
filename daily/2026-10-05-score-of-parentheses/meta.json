@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "856",
+  "date": "2026-10-05",
+  "slug": "score-of-parentheses",
+  "title": "Score of Parentheses",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "String",
+    "Stack",
+    "Bracket Sequences"
+  ],
+  "url": "https://leetcode.com/problems/score-of-parentheses/",
+  "urlCn": "https://leetcode.cn/problems/score-of-parentheses/",
+  "branch": "daily/2026-10-05-score-of-parentheses",
+  "titleZh": "括号的分数",
+  "topicTags": [
+    "栈",
+    "字符串",
+    "Bracket Sequences"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}

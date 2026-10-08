@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LeetCode 每日挑戰</title>
+<meta name="theme-color" content="#2f6fe4">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,28 +21,23 @@
       <input class="search" id="search" type="search" placeholder="搜尋題號、題名、標籤…">
     </div>
 
-    <div class="filters" id="filters">
-      <div class="seg" id="statusSeg">
-        <button data-status="all" aria-pressed="true">全部</button>
-        <button data-status="todo" aria-pressed="false">未解</button>
-        <button data-status="wip" aria-pressed="false">進行中</button>
-        <button data-status="done" aria-pressed="false">已解</button>
-      </div>
-      <div class="seg" id="diffSeg">
-        <button data-diff="all" aria-pressed="true">不分難度</button>
-        <button data-diff="Easy" aria-pressed="false">簡單</button>
-        <button data-diff="Medium" aria-pressed="false">中等</button>
-        <button data-diff="Hard" aria-pressed="false">困難</button>
-      </div>
-      <span class="divider"></span>
-      <span class="label">標籤</span>
-      <span id="tagFilters" class="filters" style="margin:0"></span>
+    <div class="pills" id="filters">
+      <button class="pill" data-filter="status">狀態</button>
+      <button class="pill" data-filter="diff">難度</button>
+      <button class="pill" data-filter="tags">標籤</button>
+      <button class="pill-clear" id="clearFilters" hidden>清除</button>
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="grid" id="grid"></div>
+  <section class="tag-hero" id="tagHero" hidden>
+    <button class="hero-back" id="heroBack">← 全部題目</button>
+    <div class="hero-icon" id="heroIcon"></div>
+    <h2 class="hero-name" id="heroName"></h2>
+    <div class="hero-sub" id="heroSub"></div>
+  </section>
+  <div class="qlist" id="grid"></div>
   <div class="empty" id="empty" hidden>沒有符合條件的題目</div>
 
   <section class="detail" id="detail">
@@ -49,7 +47,7 @@
       <span class="stats" id="dDate"></span>
       <span class="spacer"></span>
       <a id="dLink" href="#" target="_blank" rel="noopener">在 LeetCode 開啟 ↗</a>
-      <button class="back" id="reveal">開啟資料夾</button>
+      <button class="back edit-only" id="reveal">開啟資料夾</button>
     </div>
     <h1 id="dTitle"></h1>
     <div class="stats" id="dTitleEn"></div>
@@ -64,7 +62,8 @@
     <div class="panel on prose" id="p-problem"></div>
 
     <div class="panel" id="p-notes">
-      <div class="editor">
+      <div class="prose static-only" id="notesView"></div>
+      <div class="editor edit-only">
         <div class="field">
           <span class="label">狀態</span>
           <div class="seg" id="statusEdit">
@@ -98,7 +97,7 @@
 
     <div class="panel" id="p-interview">
       <div class="prose" id="interviewView"></div>
-      <details class="editor" id="interviewEdit" style="margin-top:20px">
+      <details class="editor edit-only" id="interviewEdit" style="margin-top:20px">
         <summary class="label" style="cursor:pointer">編輯這一區（Markdown）</summary>
         <div class="field" style="margin-top:12px">
           <textarea id="interview" spellcheck="false"></textarea>
@@ -113,6 +112,16 @@
     <div class="panel" id="p-code"></div>
   </section>
 </main>
+
+<div class="sheet-backdrop" id="sheetBackdrop" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head">
+      <h2 id="sheetTitle"></h2>
+    </div>
+    <div class="sheet-body" id="sheetBody"></div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 <script src="app.js"></script>

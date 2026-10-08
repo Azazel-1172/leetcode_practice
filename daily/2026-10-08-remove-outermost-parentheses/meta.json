@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "1021",
+  "date": "2026-10-08",
+  "slug": "remove-outermost-parentheses",
+  "title": "Remove Outermost Parentheses",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "String",
+    "Stack",
+    "Bracket Sequences"
+  ],
+  "url": "https://leetcode.com/problems/remove-outermost-parentheses/",
+  "urlCn": "https://leetcode.cn/problems/remove-outermost-parentheses/",
+  "branch": "daily/2026-10-08-remove-outermost-parentheses",
+  "titleZh": "删除最外层的括号",
+  "topicTags": [
+    "栈",
+    "字符串",
+    "Bracket Sequences"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}

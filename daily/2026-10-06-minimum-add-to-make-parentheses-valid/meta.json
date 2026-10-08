@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "921",
+  "date": "2026-10-06",
+  "slug": "minimum-add-to-make-parentheses-valid",
+  "title": "Minimum Add to Make Parentheses Valid",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "String",
+    "Stack",
+    "Greedy",
+    "Bracket Sequences"
+  ],
+  "url": "https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/",
+  "urlCn": "https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/",
+  "branch": "daily/2026-10-06-minimum-add-to-make-parentheses-valid",
+  "titleZh": "使括号有效的最少添加",
+  "topicTags": [
+    "栈",
+    "贪心",
+    "字符串",
+    "Bracket Sequences"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
