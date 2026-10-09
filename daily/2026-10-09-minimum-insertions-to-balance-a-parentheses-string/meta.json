@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "1541",
+  "date": "2026-10-09",
+  "slug": "minimum-insertions-to-balance-a-parentheses-string",
+  "title": "Minimum Insertions to Balance a Parentheses String",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "String",
+    "Stack",
+    "Greedy",
+    "Bracket Sequences"
+  ],
+  "url": "https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/",
+  "urlCn": "https://leetcode.cn/problems/minimum-insertions-to-balance-a-parentheses-string/",
+  "branch": "daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string",
+  "titleZh": "平衡括号字符串的最少插入次数",
+  "topicTags": [
+    "栈",
+    "贪心",
+    "字符串",
+    "Bracket Sequences"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
