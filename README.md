@@ -35,10 +35,11 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽
 
-共 **8** 題　|　已解 **2** 題　|　最後更新：2026-10-09
+共 **9** 題　|　已解 **2** 題　|　最後更新：2026-10-10
 
 | 日期 | # | 題目 | 難度 | 狀態 | 標籤 | 連結 |
 |---|---|---|---|---|---|---|
+| 2026-10-10 | 2333 | [最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md) | 中等 | ⬜ 未解 | `贪心`、`数组`、`二分查找`、`排序`、`堆（优先队列）` | [LC](https://leetcode.com/problems/minimum-sum-of-squared-difference/) |
 | 2026-10-09 | 1541 | [平衡括号字符串的最少插入次数](daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string/README.md) | 中等 | ⬜ 未解 | `栈`、`贪心`、`字符串`、`Bracket Sequences` | [LC](https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/) |
 | 2026-10-08 | 1021 | [删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md) | 簡單 | ⬜ 未解 | `栈`、`字符串`、`Bracket Sequences` | [LC](https://leetcode.com/problems/remove-outermost-parentheses/) |
 | 2026-10-06 | 921 | [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md) | 中等 | ⬜ 未解 | `栈`、`贪心`、`字符串`、`Bracket Sequences` | [LC](https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/) |
@@ -52,18 +53,20 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 
 - **Bracket Sequences** (4)：[平衡括号字符串的最少插入次数](daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string/README.md), [删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
 - **字符串** (4)：[平衡括号字符串的最少插入次数](daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string/README.md), [删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
+- **数组** (4)：[最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md), [数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md), [将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **栈** (4)：[平衡括号字符串的最少插入次数](daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string/README.md), [删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
-- **数组** (3)：[数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md), [将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
+- **贪心** (3)：[最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md), [平衡括号字符串的最少插入次数](daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md)
+- **二分查找** (2)：[最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md), [将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
 - **取餘數** (2)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md), [求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **数学** (2)：[数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
-- **贪心** (2)：[平衡括号字符串的最少插入次数](daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md)
-- **二分查找** (1)：[将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
 - **前綴積** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **前缀和** (1)：[将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
 - **動態規劃 DP** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **區間查詢** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **哈希表** (1)：[将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
 - **單點修改** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
+- **堆（优先队列）** (1)：[最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md)
+- **排序** (1)：[最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md)
 - **數學** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **滑动窗口** (1)：[将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
 - **滾動陣列** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)

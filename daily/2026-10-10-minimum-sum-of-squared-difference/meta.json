@@ -1,0 +1,35 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2333",
+  "date": "2026-10-10",
+  "slug": "minimum-sum-of-squared-difference",
+  "title": "Minimum Sum of Squared Difference",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Binary Search",
+    "Greedy",
+    "Sorting",
+    "Heap (Priority Queue)"
+  ],
+  "url": "https://leetcode.com/problems/minimum-sum-of-squared-difference/",
+  "urlCn": "https://leetcode.cn/problems/minimum-sum-of-squared-difference/",
+  "branch": "daily/2026-10-10-minimum-sum-of-squared-difference",
+  "titleZh": "最小差值平方和",
+  "topicTags": [
+    "贪心",
+    "数组",
+    "二分查找",
+    "排序",
+    "堆（优先队列）"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
