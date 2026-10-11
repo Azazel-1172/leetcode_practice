@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2778",
+  "date": "2026-10-11",
+  "slug": "sum-of-squares-of-special-elements",
+  "title": "Sum of Squares of Special Elements ",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Array",
+    "Enumeration"
+  ],
+  "url": "https://leetcode.com/problems/sum-of-squares-of-special-elements/",
+  "urlCn": "https://leetcode.cn/problems/sum-of-squares-of-special-elements/",
+  "branch": "daily/2026-10-11-sum-of-squares-of-special-elements",
+  "titleZh": "特殊元素平方和",
+  "topicTags": [
+    "数组",
+    "枚举"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
