@@ -122,7 +122,7 @@ function renderHero() {
 
 const STATUS_OPTS = [['todo', '未解'], ['wip', '進行中'], ['done', '已解']];
 const DIFF_OPTS = [['Easy', '簡單'], ['Medium', '中等'], ['Hard', '困難']];
-const SHEET_TITLE = { status: '狀態', diff: '難度', tags: '標籤' };
+const SHEET_TITLE = { status: '狀態', diff: '難度', tags: '標籤', topics: '本題標籤' };
 
 function renderPills() {
   for (const b of $('filters').querySelectorAll('.pill')) {
@@ -186,6 +186,11 @@ function renderSheet() {
     return;
   }
 
+  if (sheetKind === 'topics') {
+    renderTopicsSheet(body);
+    return;
+  }
+
   // 標籤：仿 LeetCode App 的 Knowledge 列表，依分類分組；點一下直接進該標籤頁
   const groups = new Map(TAG_GROUPS.map((g) => [g, new Map()]));
   for (const p of state.problems) {
@@ -224,6 +229,40 @@ function renderSheet() {
     }
     body.append(sec);
   }
+}
+
+/** 題目頁的「本題標籤」面板：我的標籤在前，每列附上題庫裡有幾題；點一下回總覽並篩該標籤 */
+function renderTopicsSheet(body) {
+  const m = state.current?.meta;
+  if (!m) return;
+  const tags = tagsOf(m);
+  const ordered = [...tags.filter((t) => t.group === '我的標籤'),
+    ...tags.filter((t) => t.group !== '我的標籤')];
+  const sec = document.createElement('section');
+  sec.className = 'sheet-sec';
+  for (const t of ordered) {
+    const mine = t.group === '我的標籤';
+    const count = state.problems.filter((p) => allTagsOf(p).includes(t.name)).length;
+    const sub = mine ? '我的標籤' : (t.zh ? `${t.zh} · LeetCode` : 'LeetCode');
+    const b = document.createElement('button');
+    b.className = 'tag-row';
+    b.append(tagIcon(t.name, mine));
+    b.insertAdjacentHTML('beforeend', `
+      <span class="tag-row-main">
+        <span class="tag-row-name${mine ? ' mine' : ''}">${escapeHtml(t.name)}</span>
+        <span class="tag-row-sub">${escapeHtml(sub)} · ${count} 題</span>
+      </span>`);
+    b.onclick = () => {
+      closeSheet();
+      const prev = state.tag;
+      state.tag = t.name;
+      closeProblem();
+      if (state.current) state.tag = prev;  // 有未儲存變更、使用者取消離開
+      else window.scrollTo(0, 0);
+    };
+    sec.append(b);
+  }
+  body.append(sec);
 }
 
 /* LeetCode 官方 API（questionTopicTags.imgUrl）提供的標籤圖示，直接引用不另存 */
@@ -308,6 +347,7 @@ async function openProblem(dir) {
   $('dLink').href = m.url || '#';
 
   $('p-problem').innerHTML = data.problemHtml;
+  renderDetailChips(m);
   $('interviewView').innerHTML = data.interviewHtml
     || '<p class="label">這一題還沒有面試官問答。在 Claude Code 執行 <code>/lc-interview</code> 產生。</p>';
   $('interview').value = data.interviewMd;
@@ -326,6 +366,44 @@ async function openProblem(dir) {
   selectTab('p-problem');
   location.hash = encodeURIComponent(dir);
   window.scrollTo(0, 0);
+}
+
+/* chip 用的線條 icon（取自 Lucide，ISC 授權），顏色跟著文字走 */
+const svgIcon = (body) => `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
+const ICON_TAG = svgIcon('<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>');
+const ICON_HINT = svgIcon('<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>');
+
+/** 手機版標題下方的 chip 列（仿 LeetCode App）：難度、標籤（點開底部面板）、提示 */
+function renderDetailChips(m) {
+  const box = $('dChips');
+  box.replaceChildren();
+  const diff = document.createElement('span');
+  diff.className = `badge d-${m.difficulty}`;
+  diff.textContent = DIFF_ZH[m.difficulty] || m.difficulty;
+  box.append(diff);
+
+  const n = tagsOf(m).length;
+  if (n) {
+    const b = document.createElement('button');
+    b.className = 'dchip';
+    b.innerHTML = `${ICON_TAG}標籤 ${n}`;
+    b.onclick = () => openSheet('topics');
+    box.append(b);
+  }
+
+  const hint = $('p-problem').querySelector('details');
+  if (hint) {
+    const b = document.createElement('button');
+    b.className = 'dchip';
+    b.innerHTML = `${ICON_HINT}提示`;
+    b.onclick = () => {
+      selectTab('p-problem');
+      hint.open = true;
+      hint.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+    box.append(b);
+  }
 }
 
 /** 唯讀模式的「筆記與標籤」：只顯示，不給編輯 */
@@ -456,6 +534,7 @@ async function save() {
     state.dirty = false;
     $('saveHint').textContent = '';
     $('p-problem').innerHTML = data.problemHtml;
+  renderDetailChips(m);
     toast('已儲存，總覽 README 也更新了');
     await loadList();
   } catch (e) {
