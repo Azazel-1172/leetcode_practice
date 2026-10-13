@@ -1393,6 +1393,28 @@ def _post(url: str, body: bytes, headers: dict) -> None:
 DISCORD_COLOR = {"Easy": 0x12855F, "Medium": 0xB4690E, "Hard": 0xC33B3B}
 
 
+def notify_tags(m: dict) -> list[str]:
+    """
+    推播用的標籤：官方標籤是專有名詞，用 LeetCode 英文原名（Greedy、Array）；
+    自訂標籤（取餘數、區間查詢 ...）照原樣用中文。
+    自訂標籤若就是某個官方標籤（例如「貪婪」= Greedy）就不重複列出，跟網頁 app 一致。
+    """
+    official = list(m.get("topicTagsEn") or m.get("topicTags") or [])
+    alias = {}
+    for group in load_tag_catalog().values():
+        for en, zh in group.items():
+            alias[zh] = en
+            alias[en.lower()] = en
+    seen = set(official)
+    out = official[:]
+    for t in m.get("userTags") or []:
+        key = alias.get(t) or alias.get(t.lower()) or t
+        if key not in seen:
+            seen.add(key)
+            out.append(t)
+    return out
+
+
 def cmd_notify(args) -> None:
     """把最新一題推播到 ntfy / Discord（有設定哪個環境變數就推哪個）。"""
     metas = load_all_meta()
@@ -1406,7 +1428,7 @@ def cmd_notify(args) -> None:
     link = args.site_url.rstrip("/") + "/#" + m["_dir"]
     title = f"{m.get('id')}. {m.get('titleZh') or m.get('title')}"
     diff = DIFFICULTY_ZH.get(m.get("difficulty"), m.get("difficulty") or "")
-    tags = "、".join(m.get("topicTags") or [])
+    tags = "、".join(notify_tags(m))
     body = f"{diff}｜{tags}" if tags else diff
 
     topic = os.environ.get("NTFY_TOPIC")

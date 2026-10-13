@@ -227,6 +227,16 @@ body.viewing .detail { display: block; }
 .back:hover { border-color: var(--accent); color: var(--accent); }
 .detail-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
 .detail h1 { font-size: 22px; margin: 6px 0 2px; }
+.dchips { display: none; }
+.dchip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12.5px; line-height: 1; padding: 5px 10px; border-radius: 999px; cursor: pointer;
+  background: var(--surface-2); color: var(--text-dim); border: 1px solid var(--border);
+}
+.dchip:hover { color: var(--accent); border-color: var(--accent); }
+.dchip .icon { display: block; width: 14px; height: 14px; flex: none; }
+.dchips .badge { font-size: 12.5px; line-height: 1; padding: 6px 10px; }
+.tag-row-name.mine { color: var(--accent); }
 .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin: 16px 0 0; }
 .tab {
   background: none; border: none; border-bottom: 2px solid transparent;
@@ -348,4 +358,10 @@ textarea:focus, .taginput:focus-within { outline: 2px solid var(--accent); outli
   .tabs { overflow-x: auto; }
   .tab { white-space: nowrap; padding: 8px 11px; }
   .detail h1 { font-size: 20px; }
+  /* 題目上方那列不換行：連結縮短成「LeetCode ↗」 */
+  .detail-head { flex-wrap: nowrap; white-space: nowrap; gap: 8px; }
+  .wide-only { display: none; }
+  /* 手機版仿 LeetCode App：標題下方一排 chip（難度、標籤、提示），難度從上方那列移過來 */
+  .dchips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+  .detail-head #dDiff { display: none; }
 }
