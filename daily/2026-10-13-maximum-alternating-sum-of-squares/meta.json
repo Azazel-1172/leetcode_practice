@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3727",
+  "date": "2026-10-13",
+  "slug": "maximum-alternating-sum-of-squares",
+  "title": "Maximum Alternating Sum of Squares",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Greedy",
+    "Sorting"
+  ],
+  "url": "https://leetcode.com/problems/maximum-alternating-sum-of-squares/",
+  "urlCn": "https://leetcode.cn/problems/maximum-alternating-sum-of-squares/",
+  "branch": "daily/2026-10-13-maximum-alternating-sum-of-squares",
+  "titleZh": "最大交替平方和",
+  "topicTags": [
+    "贪心",
+    "数组",
+    "排序"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
