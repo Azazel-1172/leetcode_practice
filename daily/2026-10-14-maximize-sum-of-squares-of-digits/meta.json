@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3723",
+  "date": "2026-10-14",
+  "slug": "maximize-sum-of-squares-of-digits",
+  "title": "Maximize Sum of Squares of Digits",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Math",
+    "Greedy"
+  ],
+  "url": "https://leetcode.com/problems/maximize-sum-of-squares-of-digits/",
+  "urlCn": "https://leetcode.cn/problems/maximize-sum-of-squares-of-digits/",
+  "branch": "daily/2026-10-14-maximize-sum-of-squares-of-digits",
+  "titleZh": "数位平方和的最大值",
+  "topicTags": [
+    "贪心",
+    "数学"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
