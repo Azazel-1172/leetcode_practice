@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2913",
+  "date": "2026-10-15",
+  "slug": "subarrays-distinct-element-sum-of-squares-i",
+  "title": "Subarrays Distinct Element Sum of Squares I",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Array",
+    "Hash Table",
+    "Binary Indexed Tree",
+    "Segment Tree"
+  ],
+  "url": "https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-i/",
+  "urlCn": "https://leetcode.cn/problems/subarrays-distinct-element-sum-of-squares-i/",
+  "branch": "daily/2026-10-15-subarrays-distinct-element-sum-of-squares-i",
+  "titleZh": "子数组不同元素数目的平方和 I",
+  "topicTags": [
+    "树状数组",
+    "线段树",
+    "数组",
+    "哈希表"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
