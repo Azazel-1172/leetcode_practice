@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3551",
+  "date": "2026-10-17",
+  "slug": "minimum-swaps-to-sort-by-digit-sum",
+  "title": "Minimum Swaps to Sort by Digit Sum",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Hash Table",
+    "Sorting"
+  ],
+  "url": "https://leetcode.com/problems/minimum-swaps-to-sort-by-digit-sum/",
+  "urlCn": "https://leetcode.cn/problems/minimum-swaps-to-sort-by-digit-sum/",
+  "branch": "daily/2026-10-17-minimum-swaps-to-sort-by-digit-sum",
+  "titleZh": "数位和排序需要的最小交换次数",
+  "topicTags": [
+    "数组",
+    "哈希表",
+    "排序"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
