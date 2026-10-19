@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2089",
+  "date": "2026-10-19",
+  "slug": "find-target-indices-after-sorting-array",
+  "title": "Find Target Indices After Sorting Array",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Array",
+    "Binary Search",
+    "Sorting"
+  ],
+  "url": "https://leetcode.com/problems/find-target-indices-after-sorting-array/",
+  "urlCn": "https://leetcode.cn/problems/find-target-indices-after-sorting-array/",
+  "branch": "daily/2026-10-19-find-target-indices-after-sorting-array",
+  "titleZh": "找出数组排序后的目标下标",
+  "topicTags": [
+    "数组",
+    "二分查找",
+    "排序"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
