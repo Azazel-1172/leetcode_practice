@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3886",
+  "date": "2026-10-20",
+  "slug": "sum-of-sortable-integers",
+  "title": "Sum of Sortable Integers",
+  "difficulty": "Hard",
+  "topicTagsEn": [
+    "Array",
+    "Math",
+    "Sorting",
+    "Enumeration"
+  ],
+  "url": "https://leetcode.com/problems/sum-of-sortable-integers/",
+  "urlCn": "https://leetcode.cn/problems/sum-of-sortable-integers/",
+  "branch": "daily/2026-10-20-sum-of-sortable-integers",
+  "titleZh": "可排序整数求和",
+  "topicTags": [
+    "数组",
+    "数学",
+    "枚举",
+    "排序"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
