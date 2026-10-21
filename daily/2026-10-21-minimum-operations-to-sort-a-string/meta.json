@@ -1,0 +1,27 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3863",
+  "date": "2026-10-21",
+  "slug": "minimum-operations-to-sort-a-string",
+  "title": "Minimum Operations to Sort a String",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "String"
+  ],
+  "url": "https://leetcode.com/problems/minimum-operations-to-sort-a-string/",
+  "urlCn": "https://leetcode.cn/problems/minimum-operations-to-sort-a-string/",
+  "branch": "daily/2026-10-21-minimum-operations-to-sort-a-string",
+  "titleZh": "将一个字符串排序的最小操作次数",
+  "topicTags": [
+    "字符串"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
