@@ -1,0 +1,27 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3942",
+  "date": "2026-10-22",
+  "slug": "minimum-operations-to-sort-a-permutation",
+  "title": "Minimum Operations to Sort a Permutation",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array"
+  ],
+  "url": "https://leetcode.com/problems/minimum-operations-to-sort-a-permutation/",
+  "urlCn": "https://leetcode.cn/problems/minimum-operations-to-sort-a-permutation/",
+  "branch": "daily/2026-10-22-minimum-operations-to-sort-a-permutation",
+  "titleZh": "排序排列的最少操作数",
+  "topicTags": [
+    "数组"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
