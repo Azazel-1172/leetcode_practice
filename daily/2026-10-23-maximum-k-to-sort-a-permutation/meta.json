@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3644",
+  "date": "2026-10-23",
+  "slug": "maximum-k-to-sort-a-permutation",
+  "title": "Maximum K to Sort a Permutation",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Bit Manipulation"
+  ],
+  "url": "https://leetcode.com/problems/maximum-k-to-sort-a-permutation/",
+  "urlCn": "https://leetcode.cn/problems/maximum-k-to-sort-a-permutation/",
+  "branch": "daily/2026-10-23-maximum-k-to-sort-a-permutation",
+  "titleZh": "排序排列",
+  "topicTags": [
+    "位运算",
+    "数组"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
