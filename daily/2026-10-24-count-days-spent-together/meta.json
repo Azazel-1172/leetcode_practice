@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2409",
+  "date": "2026-10-24",
+  "slug": "count-days-spent-together",
+  "title": "Count Days Spent Together",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Math",
+    "String"
+  ],
+  "url": "https://leetcode.com/problems/count-days-spent-together/",
+  "urlCn": "https://leetcode.cn/problems/count-days-spent-together/",
+  "branch": "daily/2026-10-24-count-days-spent-together",
+  "titleZh": "统计共同度过的日子数",
+  "topicTags": [
+    "数学",
+    "字符串"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
