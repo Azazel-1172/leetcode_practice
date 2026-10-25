@@ -1,0 +1,35 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "1254",
+  "date": "2026-10-25",
+  "slug": "number-of-closed-islands",
+  "title": "Number of Closed Islands",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Depth-First Search",
+    "Breadth-First Search",
+    "Union-Find",
+    "Matrix"
+  ],
+  "url": "https://leetcode.com/problems/number-of-closed-islands/",
+  "urlCn": "https://leetcode.cn/problems/number-of-closed-islands/",
+  "branch": "daily/2026-10-25-number-of-closed-islands",
+  "titleZh": "统计封闭岛屿的数目",
+  "topicTags": [
+    "深度优先搜索",
+    "广度优先搜索",
+    "并查集",
+    "数组",
+    "矩阵"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}

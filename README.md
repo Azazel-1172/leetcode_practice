@@ -35,10 +35,11 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽
 
-共 **23** 題　|　已解 **2** 題　|　最後更新：2026-10-24
+共 **24** 題　|　已解 **2** 題　|　最後更新：2026-10-25
 
 | 日期 | # | 題目 | 難度 | 狀態 | 標籤 | 連結 |
 |---|---|---|---|---|---|---|
+| 2026-10-25 | 1254 | [统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md) | 中等 | ⬜ 未解 | `深度优先搜索`、`广度优先搜索`、`并查集`、`数组`、`矩阵` | [LC](https://leetcode.com/problems/number-of-closed-islands/) |
 | 2026-10-24 | 2409 | [统计共同度过的日子数](daily/2026-10-24-count-days-spent-together/README.md) | 簡單 | ⬜ 未解 | `数学`、`字符串` | [LC](https://leetcode.com/problems/count-days-spent-together/) |
 | 2026-10-23 | 3644 | [排序排列](daily/2026-10-23-maximum-k-to-sort-a-permutation/README.md) | 中等 | ⬜ 未解 | `位运算`、`数组` | [LC](https://leetcode.com/problems/maximum-k-to-sort-a-permutation/) |
 | 2026-10-22 | 3942 | [排序排列的最少操作数](daily/2026-10-22-minimum-operations-to-sort-a-permutation/README.md) | 中等 | ⬜ 未解 | `数组` | [LC](https://leetcode.com/problems/minimum-operations-to-sort-a-permutation/) |
@@ -65,7 +66,7 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 
 ## 🏷️ 標籤索引
 
-- **数组** (15)：[排序排列](daily/2026-10-23-maximum-k-to-sort-a-permutation/README.md), [排序排列的最少操作数](daily/2026-10-22-minimum-operations-to-sort-a-permutation/README.md), [可排序整数求和](daily/2026-10-20-sum-of-sortable-integers/README.md), [找出数组排序后的目标下标](daily/2026-10-19-find-target-indices-after-sorting-array/README.md), [将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md), [数位和排序需要的最小交换次数](daily/2026-10-17-minimum-swaps-to-sort-by-digit-sum/README.md), [子数组不同元素数目的平方和 II](daily/2026-10-16-subarrays-distinct-element-sum-of-squares-ii/README.md), [子数组不同元素数目的平方和 I](daily/2026-10-15-subarrays-distinct-element-sum-of-squares-i/README.md), [最大交替平方和](daily/2026-10-13-maximum-alternating-sum-of-squares/README.md), [对数组执行操作使平方和最大](daily/2026-10-12-apply-operations-on-array-to-maximize-sum-of-squares/README.md), [特殊元素平方和](daily/2026-10-11-sum-of-squares-of-special-elements/README.md), [最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md), [数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md), [将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
+- **数组** (16)：[统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md), [排序排列](daily/2026-10-23-maximum-k-to-sort-a-permutation/README.md), [排序排列的最少操作数](daily/2026-10-22-minimum-operations-to-sort-a-permutation/README.md), [可排序整数求和](daily/2026-10-20-sum-of-sortable-integers/README.md), [找出数组排序后的目标下标](daily/2026-10-19-find-target-indices-after-sorting-array/README.md), [将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md), [数位和排序需要的最小交换次数](daily/2026-10-17-minimum-swaps-to-sort-by-digit-sum/README.md), [子数组不同元素数目的平方和 II](daily/2026-10-16-subarrays-distinct-element-sum-of-squares-ii/README.md), [子数组不同元素数目的平方和 I](daily/2026-10-15-subarrays-distinct-element-sum-of-squares-i/README.md), [最大交替平方和](daily/2026-10-13-maximum-alternating-sum-of-squares/README.md), [对数组执行操作使平方和最大](daily/2026-10-12-apply-operations-on-array-to-maximize-sum-of-squares/README.md), [特殊元素平方和](daily/2026-10-11-sum-of-squares-of-special-elements/README.md), [最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md), [数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md), [将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **字符串** (6)：[统计共同度过的日子数](daily/2026-10-24-count-days-spent-together/README.md), [将一个字符串排序的最小操作次数](daily/2026-10-21-minimum-operations-to-sort-a-string/README.md), [平衡括号字符串的最少插入次数](daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string/README.md), [删除最外层的括号](daily/2026-10-08-remove-outermost-parentheses/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md), [括号的分数](daily/2026-10-05-score-of-parentheses/README.md)
 - **数学** (6)：[统计共同度过的日子数](daily/2026-10-24-count-days-spent-together/README.md), [可排序整数求和](daily/2026-10-20-sum-of-sortable-integers/README.md), [将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md), [数位平方和的最大值](daily/2026-10-14-maximize-sum-of-squares-of-digits/README.md), [数位和等于下标的最小下标](daily/2026-09-24-smallest-index-with-digit-sum-equal-to-index/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **贪心** (6)：[数位平方和的最大值](daily/2026-10-14-maximize-sum-of-squares-of-digits/README.md), [最大交替平方和](daily/2026-10-13-maximum-alternating-sum-of-squares/README.md), [对数组执行操作使平方和最大](daily/2026-10-12-apply-operations-on-array-to-maximize-sum-of-squares/README.md), [最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md), [平衡括号字符串的最少插入次数](daily/2026-10-09-minimum-insertions-to-balance-a-parentheses-string/README.md), [使括号有效的最少添加](daily/2026-10-06-minimum-add-to-make-parentheses-valid/README.md)
@@ -77,6 +78,7 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 - **线段树** (3)：[子数组不同元素数目的平方和 II](daily/2026-10-16-subarrays-distinct-element-sum-of-squares-ii/README.md), [子数组不同元素数目的平方和 I](daily/2026-10-15-subarrays-distinct-element-sum-of-squares-i/README.md), [求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **位运算** (2)：[排序排列](daily/2026-10-23-maximum-k-to-sort-a-permutation/README.md), [对数组执行操作使平方和最大](daily/2026-10-12-apply-operations-on-array-to-maximize-sum-of-squares/README.md)
 - **取餘數** (2)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md), [求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **并查集** (2)：[统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md), [将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
 - **枚举** (2)：[可排序整数求和](daily/2026-10-20-sum-of-sortable-integers/README.md), [特殊元素平方和](daily/2026-10-11-sum-of-squares-of-special-elements/README.md)
 - **树状数组** (2)：[子数组不同元素数目的平方和 II](daily/2026-10-16-subarrays-distinct-element-sum-of-squares-ii/README.md), [子数组不同元素数目的平方和 I](daily/2026-10-15-subarrays-distinct-element-sum-of-squares-i/README.md)
 - **Fermat's Little Theorem** (1)：[将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
@@ -90,11 +92,13 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 - **區間查詢** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **單點修改** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **堆（优先队列）** (1)：[最小差值平方和](daily/2026-10-10-minimum-sum-of-squared-difference/README.md)
-- **并查集** (1)：[将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
+- **广度优先搜索** (1)：[统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md)
 - **數學** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **树** (1)：[将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
+- **深度优先搜索** (1)：[统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md)
 - **滑动窗口** (1)：[将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
 - **滾動陣列** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
+- **矩阵** (1)：[统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md)
 - **線段樹** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
 - **组合数学** (1)：[将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
 - **計數陣列** (1)：[求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
