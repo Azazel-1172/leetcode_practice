@@ -1,0 +1,35 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3619",
+  "date": "2026-10-26",
+  "slug": "count-islands-with-total-value-divisible-by-k",
+  "title": "Count Islands With Total Value Divisible by K",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Depth-First Search",
+    "Breadth-First Search",
+    "Union-Find",
+    "Matrix"
+  ],
+  "url": "https://leetcode.com/problems/count-islands-with-total-value-divisible-by-k/",
+  "urlCn": "https://leetcode.cn/problems/count-islands-with-total-value-divisible-by-k/",
+  "branch": "daily/2026-10-26-count-islands-with-total-value-divisible-by-k",
+  "titleZh": "总价值可以被 K 整除的岛屿数目",
+  "topicTags": [
+    "深度优先搜索",
+    "广度优先搜索",
+    "并查集",
+    "数组",
+    "矩阵"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
