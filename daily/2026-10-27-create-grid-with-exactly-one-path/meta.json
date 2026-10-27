@@ -1,0 +1,23 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3963",
+  "date": "2026-10-27",
+  "slug": "create-grid-with-exactly-one-path",
+  "title": "Create Grid With Exactly One Path",
+  "difficulty": "Easy",
+  "topicTagsEn": [],
+  "url": "https://leetcode.com/problems/create-grid-with-exactly-one-path/",
+  "urlCn": "https://leetcode.cn/problems/create-grid-with-exactly-one-path/",
+  "branch": "daily/2026-10-27-create-grid-with-exactly-one-path",
+  "titleZh": "构造恰好一条路径的网格",
+  "topicTags": [],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}

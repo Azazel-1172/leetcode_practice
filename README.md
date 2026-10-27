@@ -35,10 +35,11 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽
 
-共 **25** 題　|　已解 **2** 題　|　最後更新：2026-10-26
+共 **26** 題　|　已解 **2** 題　|　最後更新：2026-10-27
 
 | 日期 | # | 題目 | 難度 | 狀態 | 標籤 | 連結 |
 |---|---|---|---|---|---|---|
+| 2026-10-27 | 3963 | [构造恰好一条路径的网格](daily/2026-10-27-create-grid-with-exactly-one-path/README.md) | 簡單 | ⬜ 未解 | — | [LC](https://leetcode.com/problems/create-grid-with-exactly-one-path/) |
 | 2026-10-26 | 3619 | [总价值可以被 K 整除的岛屿数目](daily/2026-10-26-count-islands-with-total-value-divisible-by-k/README.md) | 中等 | ⬜ 未解 | `深度优先搜索`、`广度优先搜索`、`并查集`、`数组`、`矩阵` | [LC](https://leetcode.com/problems/count-islands-with-total-value-divisible-by-k/) |
 | 2026-10-25 | 1254 | [统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md) | 中等 | ⬜ 未解 | `深度优先搜索`、`广度优先搜索`、`并查集`、`数组`、`矩阵` | [LC](https://leetcode.com/problems/number-of-closed-islands/) |
 | 2026-10-24 | 2409 | [统计共同度过的日子数](daily/2026-10-24-count-days-spent-together/README.md) | 簡單 | ⬜ 未解 | `数学`、`字符串` | [LC](https://leetcode.com/problems/count-days-spent-together/) |
