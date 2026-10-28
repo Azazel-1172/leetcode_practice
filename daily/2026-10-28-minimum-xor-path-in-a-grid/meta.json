@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3882",
+  "date": "2026-10-28",
+  "slug": "minimum-xor-path-in-a-grid",
+  "title": "Minimum XOR Path in a Grid",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Dynamic Programming",
+    "Bit Manipulation",
+    "Matrix"
+  ],
+  "url": "https://leetcode.com/problems/minimum-xor-path-in-a-grid/",
+  "urlCn": "https://leetcode.cn/problems/minimum-xor-path-in-a-grid/",
+  "branch": "daily/2026-10-28-minimum-xor-path-in-a-grid",
+  "titleZh": "网格图中最小异或路径",
+  "topicTags": [
+    "位运算",
+    "数组",
+    "动态规划",
+    "矩阵"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
