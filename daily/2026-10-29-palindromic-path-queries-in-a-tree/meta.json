@@ -1,0 +1,41 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3841",
+  "date": "2026-10-29",
+  "slug": "palindromic-path-queries-in-a-tree",
+  "title": "Palindromic Path Queries in a Tree",
+  "difficulty": "Hard",
+  "topicTagsEn": [
+    "Array",
+    "String",
+    "Divide and Conquer",
+    "Bit Manipulation",
+    "Tree",
+    "Depth-First Search",
+    "Binary Indexed Tree",
+    "Segment Tree"
+  ],
+  "url": "https://leetcode.com/problems/palindromic-path-queries-in-a-tree/",
+  "urlCn": "https://leetcode.cn/problems/palindromic-path-queries-in-a-tree/",
+  "branch": "daily/2026-10-29-palindromic-path-queries-in-a-tree",
+  "titleZh": "查询树上回文路径",
+  "topicTags": [
+    "位运算",
+    "树",
+    "深度优先搜索",
+    "树状数组",
+    "线段树",
+    "数组",
+    "字符串",
+    "分治"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
