@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3970",
+  "date": "2026-10-30",
+  "slug": "shortest-path-with-at-most-k-consecutive-identical-characters",
+  "title": "Shortest Path With At Most K Consecutive Identical Characters",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "String",
+    "Graph Theory",
+    "Heap (Priority Queue)",
+    "Shortest Path"
+  ],
+  "url": "https://leetcode.com/problems/shortest-path-with-at-most-k-consecutive-identical-characters/",
+  "urlCn": "https://leetcode.cn/problems/shortest-path-with-at-most-k-consecutive-identical-characters/",
+  "branch": "daily/2026-10-30-shortest-path-with-at-most-k-consecutive-identical-characters",
+  "titleZh": "最多 K 个连续相同字符的最短路径",
+  "topicTags": [
+    "图",
+    "字符串",
+    "最短路",
+    "堆（优先队列）"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
