@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3665",
+  "date": "2026-10-31",
+  "slug": "twisted-mirror-path-count",
+  "title": "Twisted Mirror Path Count",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Dynamic Programming",
+    "Matrix"
+  ],
+  "url": "https://leetcode.com/problems/twisted-mirror-path-count/",
+  "urlCn": "https://leetcode.cn/problems/twisted-mirror-path-count/",
+  "branch": "daily/2026-10-31-twisted-mirror-path-count",
+  "titleZh": "统计镜子反射路径数目",
+  "topicTags": [
+    "数组",
+    "动态规划",
+    "矩阵"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
