@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "453",
+  "date": "2026-11-01",
+  "slug": "minimum-moves-to-equal-array-elements",
+  "title": "Minimum Moves to Equal Array Elements",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Math"
+  ],
+  "url": "https://leetcode.com/problems/minimum-moves-to-equal-array-elements/",
+  "urlCn": "https://leetcode.cn/problems/minimum-moves-to-equal-array-elements/",
+  "branch": "daily/2026-11-01-minimum-moves-to-equal-array-elements",
+  "titleZh": "最小操作次数使数组元素相等",
+  "topicTags": [
+    "数组",
+    "数学"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
