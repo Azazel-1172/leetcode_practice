@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3736",
+  "date": "2026-11-03",
+  "slug": "minimum-moves-to-equal-array-elements-iii",
+  "title": "Minimum Moves to Equal Array Elements III",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Array",
+    "Math"
+  ],
+  "url": "https://leetcode.com/problems/minimum-moves-to-equal-array-elements-iii/",
+  "urlCn": "https://leetcode.cn/problems/minimum-moves-to-equal-array-elements-iii/",
+  "branch": "daily/2026-11-03-minimum-moves-to-equal-array-elements-iii",
+  "titleZh": "最小操作次数使数组元素相等 III",
+  "topicTags": [
+    "数组",
+    "数学"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
