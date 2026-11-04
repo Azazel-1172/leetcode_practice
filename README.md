@@ -35,10 +35,11 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽
 
-共 **33** 題　|　已解 **2** 題　|　最後更新：2026-11-03
+共 **34** 題　|　已解 **2** 題　|　最後更新：2026-11-04
 
 | 日期 | # | 題目 | 難度 | 狀態 | 標籤 | 連結 |
 |---|---|---|---|---|---|---|
+| 2026-11-04 | 3505 | [Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md) | 困難 | ⬜ 未解 | `Array`、`Hash Table`、`Math`、`Dynamic Programming`、`Sliding Window`、`Heap (Priority Queue)` | [LC](https://leetcode.com/problems/minimum-operations-to-make-elements-within-k-subarrays-equal/) |
 | 2026-11-03 | 3736 | [最小操作次数使数组元素相等 III](daily/2026-11-03-minimum-moves-to-equal-array-elements-iii/README.md) | 簡單 | ⬜ 未解 | `数组`、`数学` | [LC](https://leetcode.com/problems/minimum-moves-to-equal-array-elements-iii/) |
 | 2026-11-02 | 462 | [最小操作次数使数组元素相等 II](daily/2026-11-02-minimum-moves-to-equal-array-elements-ii/README.md) | 中等 | ⬜ 未解 | `数组`、`数学`、`排序` | [LC](https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/) |
 | 2026-11-01 | 453 | [最小操作次数使数组元素相等](daily/2026-11-01-minimum-moves-to-equal-array-elements/README.md) | 中等 | ⬜ 未解 | `数组`、`数学` | [LC](https://leetcode.com/problems/minimum-moves-to-equal-array-elements/) |
@@ -97,7 +98,13 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 - **广度优先搜索** (2)：[总价值可以被 K 整除的岛屿数目](daily/2026-10-26-count-islands-with-total-value-divisible-by-k/README.md), [统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md)
 - **枚举** (2)：[可排序整数求和](daily/2026-10-20-sum-of-sortable-integers/README.md), [特殊元素平方和](daily/2026-10-11-sum-of-squares-of-special-elements/README.md)
 - **树** (2)：[查询树上回文路径](daily/2026-10-29-palindromic-path-queries-in-a-tree/README.md), [将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
+- **Array** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
+- **Dynamic Programming** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
 - **Fermat's Little Theorem** (1)：[将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
+- **Hash Table** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
+- **Heap (Priority Queue)** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
+- **Math** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
+- **Sliding Window** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
 - **二叉搜索树** (1)：[将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
 - **二叉树** (1)：[将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
 - **前綴積** (1)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md)
