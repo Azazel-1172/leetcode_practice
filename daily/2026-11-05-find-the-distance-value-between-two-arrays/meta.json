@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "1385",
+  "date": "2026-11-05",
+  "slug": "find-the-distance-value-between-two-arrays",
+  "title": "Find the Distance Value Between Two Arrays",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Array",
+    "Two Pointers",
+    "Binary Search",
+    "Sorting"
+  ],
+  "url": "https://leetcode.com/problems/find-the-distance-value-between-two-arrays/",
+  "urlCn": "https://leetcode.cn/problems/find-the-distance-value-between-two-arrays/",
+  "branch": "daily/2026-11-05-find-the-distance-value-between-two-arrays",
+  "titleZh": "两个数组间的距离值",
+  "topicTags": [
+    "数组",
+    "双指针",
+    "二分查找",
+    "排序"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
