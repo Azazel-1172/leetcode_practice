@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2747",
+  "date": "2026-11-06",
+  "slug": "count-zero-request-servers",
+  "title": "Count Zero Request Servers",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Hash Table",
+    "Sliding Window",
+    "Sorting"
+  ],
+  "url": "https://leetcode.com/problems/count-zero-request-servers/",
+  "urlCn": "https://leetcode.cn/problems/count-zero-request-servers/",
+  "branch": "daily/2026-11-06-count-zero-request-servers",
+  "titleZh": "统计没有收到请求的服务器数目",
+  "topicTags": [
+    "数组",
+    "哈希表",
+    "排序",
+    "滑动窗口"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
