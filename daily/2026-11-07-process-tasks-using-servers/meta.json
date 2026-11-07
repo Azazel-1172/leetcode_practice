@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "1882",
+  "date": "2026-11-07",
+  "slug": "process-tasks-using-servers",
+  "title": "Process Tasks Using Servers",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Heap (Priority Queue)"
+  ],
+  "url": "https://leetcode.com/problems/process-tasks-using-servers/",
+  "urlCn": "https://leetcode.cn/problems/process-tasks-using-servers/",
+  "branch": "daily/2026-11-07-process-tasks-using-servers",
+  "titleZh": "使用服务器处理任务",
+  "topicTags": [
+    "数组",
+    "堆（优先队列）"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
