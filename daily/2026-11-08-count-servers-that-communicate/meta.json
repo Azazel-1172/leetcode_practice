@@ -1,0 +1,37 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "1267",
+  "date": "2026-11-08",
+  "slug": "count-servers-that-communicate",
+  "title": "Count Servers that Communicate",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Depth-First Search",
+    "Breadth-First Search",
+    "Union-Find",
+    "Matrix",
+    "Counting"
+  ],
+  "url": "https://leetcode.com/problems/count-servers-that-communicate/",
+  "urlCn": "https://leetcode.cn/problems/count-servers-that-communicate/",
+  "branch": "daily/2026-11-08-count-servers-that-communicate",
+  "titleZh": "统计参与通信的服务器",
+  "topicTags": [
+    "深度优先搜索",
+    "广度优先搜索",
+    "并查集",
+    "数组",
+    "计数",
+    "矩阵"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
