@@ -35,10 +35,11 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 <!-- LCDAILY:BEGIN -->
 ## 📅 每日挑戰總覽
 
-共 **39** 題　|　已解 **2** 題　|　最後更新：2026-11-09
+共 **40** 題　|　已解 **2** 題　|　最後更新：2026-11-10
 
 | 日期 | # | 題目 | 難度 | 狀態 | 標籤 | 連結 |
 |---|---|---|---|---|---|---|
+| 2026-11-10 | 3693 | [爬楼梯 II](daily/2026-11-10-climbing-stairs-ii/README.md) | 中等 | ⬜ 未解 | `Array`、`Dynamic Programming` | [LC](https://leetcode.com/problems/climbing-stairs-ii/) |
 | 2026-11-09 | 1606 | [找到处理最多请求的服务器](daily/2026-11-09-find-servers-that-handled-most-number-of-requests/README.md) | 困難 | ⬜ 未解 | `数组`、`有序集合`、`模拟`、`堆（优先队列）` | [LC](https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/) |
 | 2026-11-08 | 1267 | [统计参与通信的服务器](daily/2026-11-08-count-servers-that-communicate/README.md) | 中等 | ⬜ 未解 | `深度优先搜索`、`广度优先搜索`、`并查集`、`数组`、`计数`、`矩阵` | [LC](https://leetcode.com/problems/count-servers-that-communicate/) |
 | 2026-11-07 | 1882 | [使用服务器处理任务](daily/2026-11-07-process-tasks-using-servers/README.md) | 中等 | ⬜ 未解 | `数组`、`堆（优先队列）` | [LC](https://leetcode.com/problems/process-tasks-using-servers/) |
@@ -99,13 +100,13 @@ python3 lcdaily.py notify --site-url <網址>     # 推播最新一題（ntfy / 
 - **动态规划** (3)：[统计镜子反射路径数目](daily/2026-10-31-twisted-mirror-path-count/README.md), [网格图中最小异或路径](daily/2026-10-28-minimum-xor-path-in-a-grid/README.md), [将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
 - **广度优先搜索** (3)：[统计参与通信的服务器](daily/2026-11-08-count-servers-that-communicate/README.md), [总价值可以被 K 整除的岛屿数目](daily/2026-10-26-count-islands-with-total-value-divisible-by-k/README.md), [统计封闭岛屿的数目](daily/2026-10-25-number-of-closed-islands/README.md)
 - **树状数组** (3)：[查询树上回文路径](daily/2026-10-29-palindromic-path-queries-in-a-tree/README.md), [子数组不同元素数目的平方和 II](daily/2026-10-16-subarrays-distinct-element-sum-of-squares-ii/README.md), [子数组不同元素数目的平方和 I](daily/2026-10-15-subarrays-distinct-element-sum-of-squares-i/README.md)
+- **Array** (2)：[爬楼梯 II](daily/2026-11-10-climbing-stairs-ii/README.md), [Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
+- **Dynamic Programming** (2)：[爬楼梯 II](daily/2026-11-10-climbing-stairs-ii/README.md), [Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
 - **分治** (2)：[查询树上回文路径](daily/2026-10-29-palindromic-path-queries-in-a-tree/README.md), [将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
 - **取餘數** (2)：[求出数组的 X 值 II](daily/2026-09-22-find-x-value-of-array-ii/README.md), [求陣列的 X 值 I](daily/2026-09-21-find-x-value-of-array-i/README.md)
 - **枚举** (2)：[可排序整数求和](daily/2026-10-20-sum-of-sortable-integers/README.md), [特殊元素平方和](daily/2026-10-11-sum-of-squares-of-special-elements/README.md)
 - **树** (2)：[查询树上回文路径](daily/2026-10-29-palindromic-path-queries-in-a-tree/README.md), [将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
 - **滑动窗口** (2)：[统计没有收到请求的服务器数目](daily/2026-11-06-count-zero-request-servers/README.md), [将 x 减到 0 的最小操作数](daily/2026-09-23-minimum-operations-to-reduce-x-to-zero/README.md)
-- **Array** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
-- **Dynamic Programming** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
 - **Fermat's Little Theorem** (1)：[将子数组重新排序得到同一个二叉搜索树的方案数](daily/2026-10-18-number-of-ways-to-reorder-array-to-get-same-bst/README.md)
 - **Hash Table** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)
 - **Heap (Priority Queue)** (1)：[Minimum Operations to Make Elements Within K Subarrays Equal](daily/2026-11-04-minimum-operations-to-make-elements-within-k-subarrays-equal/README.md)

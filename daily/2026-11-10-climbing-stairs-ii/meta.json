@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3693",
+  "date": "2026-11-10",
+  "slug": "climbing-stairs-ii",
+  "title": "Climbing Stairs II",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Dynamic Programming"
+  ],
+  "url": "https://leetcode.com/problems/climbing-stairs-ii/",
+  "urlCn": "https://leetcode.cn/problems/climbing-stairs-ii/",
+  "branch": "daily/2026-11-10-climbing-stairs-ii",
+  "titleZh": "爬楼梯 II",
+  "topicTags": [
+    "Array",
+    "Dynamic Programming"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
