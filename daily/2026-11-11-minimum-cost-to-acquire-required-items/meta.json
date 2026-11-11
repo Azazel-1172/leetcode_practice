@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3789",
+  "date": "2026-11-11",
+  "slug": "minimum-cost-to-acquire-required-items",
+  "title": "Minimum Cost to Acquire Required Items",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Math",
+    "Greedy"
+  ],
+  "url": "https://leetcode.com/problems/minimum-cost-to-acquire-required-items/",
+  "urlCn": "https://leetcode.cn/problems/minimum-cost-to-acquire-required-items/",
+  "branch": "daily/2026-11-11-minimum-cost-to-acquire-required-items",
+  "titleZh": "采购的最小花费",
+  "topicTags": [
+    "贪心",
+    "数学"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
