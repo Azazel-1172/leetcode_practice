@@ -1,0 +1,27 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3105",
+  "date": "2026-11-12",
+  "slug": "longest-strictly-increasing-or-strictly-decreasing-subarray",
+  "title": "Longest Strictly Increasing or Strictly Decreasing Subarray",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Array"
+  ],
+  "url": "https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray/",
+  "urlCn": "https://leetcode.cn/problems/longest-strictly-increasing-or-strictly-decreasing-subarray/",
+  "branch": "daily/2026-11-12-longest-strictly-increasing-or-strictly-decreasing-subarray",
+  "titleZh": "最长的严格递增或递减子数组",
+  "topicTags": [
+    "数组"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
