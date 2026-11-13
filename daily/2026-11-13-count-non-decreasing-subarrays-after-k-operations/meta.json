@@ -1,0 +1,39 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3420",
+  "date": "2026-11-13",
+  "slug": "count-non-decreasing-subarrays-after-k-operations",
+  "title": "Count Non-Decreasing Subarrays After K Operations",
+  "difficulty": "Hard",
+  "topicTagsEn": [
+    "Array",
+    "Stack",
+    "Segment Tree",
+    "Queue",
+    "Sliding Window",
+    "Monotonic Stack",
+    "Monotonic Queue"
+  ],
+  "url": "https://leetcode.com/problems/count-non-decreasing-subarrays-after-k-operations/",
+  "urlCn": "https://leetcode.cn/problems/count-non-decreasing-subarrays-after-k-operations/",
+  "branch": "daily/2026-11-13-count-non-decreasing-subarrays-after-k-operations",
+  "titleZh": "统计 K 次操作以内得到非递减子数组的数目",
+  "topicTags": [
+    "栈",
+    "线段树",
+    "队列",
+    "数组",
+    "滑动窗口",
+    "单调队列",
+    "单调栈"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
