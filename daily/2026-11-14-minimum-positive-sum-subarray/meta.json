@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3364",
+  "date": "2026-11-14",
+  "slug": "minimum-positive-sum-subarray",
+  "title": "Minimum Positive Sum Subarray ",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Array",
+    "Sliding Window",
+    "Prefix Sum"
+  ],
+  "url": "https://leetcode.com/problems/minimum-positive-sum-subarray/",
+  "urlCn": "https://leetcode.cn/problems/minimum-positive-sum-subarray/",
+  "branch": "daily/2026-11-14-minimum-positive-sum-subarray",
+  "titleZh": "最小正和子数组",
+  "topicTags": [
+    "数组",
+    "前缀和",
+    "滑动窗口"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
