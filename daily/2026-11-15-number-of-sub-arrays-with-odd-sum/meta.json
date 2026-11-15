@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "1524",
+  "date": "2026-11-15",
+  "slug": "number-of-sub-arrays-with-odd-sum",
+  "title": "Number of Sub-arrays With Odd Sum",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Math",
+    "Dynamic Programming",
+    "Prefix Sum"
+  ],
+  "url": "https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/",
+  "urlCn": "https://leetcode.cn/problems/number-of-sub-arrays-with-odd-sum/",
+  "branch": "daily/2026-11-15-number-of-sub-arrays-with-odd-sum",
+  "titleZh": "和为奇数的子数组数目",
+  "topicTags": [
+    "数组",
+    "数学",
+    "动态规划",
+    "前缀和"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
