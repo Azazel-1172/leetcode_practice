@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2911",
+  "date": "2026-11-17",
+  "slug": "minimum-changes-to-make-k-semi-palindromes",
+  "title": "Minimum Changes to Make K Semi-palindromes",
+  "difficulty": "Hard",
+  "topicTagsEn": [
+    "Two Pointers",
+    "String",
+    "Dynamic Programming"
+  ],
+  "url": "https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/",
+  "urlCn": "https://leetcode.cn/problems/minimum-changes-to-make-k-semi-palindromes/",
+  "branch": "daily/2026-11-17-minimum-changes-to-make-k-semi-palindromes",
+  "titleZh": "得到 K 个半回文串的最少修改次数",
+  "topicTags": [
+    "双指针",
+    "字符串",
+    "动态规划"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
