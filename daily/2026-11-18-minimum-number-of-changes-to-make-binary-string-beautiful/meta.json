@@ -1,0 +1,27 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2914",
+  "date": "2026-11-18",
+  "slug": "minimum-number-of-changes-to-make-binary-string-beautiful",
+  "title": "Minimum Number of Changes to Make Binary String Beautiful",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "String"
+  ],
+  "url": "https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/",
+  "urlCn": "https://leetcode.cn/problems/minimum-number-of-changes-to-make-binary-string-beautiful/",
+  "branch": "daily/2026-11-18-minimum-number-of-changes-to-make-binary-string-beautiful",
+  "titleZh": "使二进制字符串变美丽的最少修改次数",
+  "topicTags": [
+    "字符串"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
