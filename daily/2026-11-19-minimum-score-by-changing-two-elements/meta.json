@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2567",
+  "date": "2026-11-19",
+  "slug": "minimum-score-by-changing-two-elements",
+  "title": "Minimum Score by Changing Two Elements",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Greedy",
+    "Sorting"
+  ],
+  "url": "https://leetcode.com/problems/minimum-score-by-changing-two-elements/",
+  "urlCn": "https://leetcode.cn/problems/minimum-score-by-changing-two-elements/",
+  "branch": "daily/2026-11-19-minimum-score-by-changing-two-elements",
+  "titleZh": "修改两个元素的最小分数",
+  "topicTags": [
+    "贪心",
+    "数组",
+    "排序"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
