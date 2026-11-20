@@ -1,0 +1,31 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3041",
+  "date": "2026-11-20",
+  "slug": "maximize-consecutive-elements-in-an-array-after-modification",
+  "title": "Maximize Consecutive Elements in an Array After Modification",
+  "difficulty": "Hard",
+  "topicTagsEn": [
+    "Array",
+    "Dynamic Programming",
+    "Sorting"
+  ],
+  "url": "https://leetcode.com/problems/maximize-consecutive-elements-in-an-array-after-modification/",
+  "urlCn": "https://leetcode.cn/problems/maximize-consecutive-elements-in-an-array-after-modification/",
+  "branch": "daily/2026-11-20-maximize-consecutive-elements-in-an-array-after-modification",
+  "titleZh": "修改数组后最大化数组中的连续元素数目",
+  "topicTags": [
+    "数组",
+    "动态规划",
+    "排序"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
