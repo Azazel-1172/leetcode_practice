@@ -1,0 +1,35 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3331",
+  "date": "2026-11-21",
+  "slug": "find-subtree-sizes-after-changes",
+  "title": "Find Subtree Sizes After Changes",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Hash Table",
+    "String",
+    "Tree",
+    "Depth-First Search"
+  ],
+  "url": "https://leetcode.com/problems/find-subtree-sizes-after-changes/",
+  "urlCn": "https://leetcode.cn/problems/find-subtree-sizes-after-changes/",
+  "branch": "daily/2026-11-21-find-subtree-sizes-after-changes",
+  "titleZh": "修改后子树的大小",
+  "topicTags": [
+    "树",
+    "深度优先搜索",
+    "数组",
+    "哈希表",
+    "字符串"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
