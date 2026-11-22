@@ -1,0 +1,27 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "2124",
+  "date": "2026-11-22",
+  "slug": "check-if-all-as-appears-before-all-bs",
+  "title": "Check if All A's Appears Before All B's",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "String"
+  ],
+  "url": "https://leetcode.com/problems/check-if-all-as-appears-before-all-bs/",
+  "urlCn": "https://leetcode.cn/problems/check-if-all-as-appears-before-all-bs/",
+  "branch": "daily/2026-11-22-check-if-all-as-appears-before-all-bs",
+  "titleZh": "检查是否所有 A 都在 B 之前",
+  "topicTags": [
+    "字符串"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
