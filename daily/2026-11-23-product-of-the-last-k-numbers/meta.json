@@ -1,0 +1,35 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "1352",
+  "date": "2026-11-23",
+  "slug": "product-of-the-last-k-numbers",
+  "title": "Product of the Last K Numbers",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Math",
+    "Design",
+    "Data Stream",
+    "Prefix Sum"
+  ],
+  "url": "https://leetcode.com/problems/product-of-the-last-k-numbers/",
+  "urlCn": "https://leetcode.cn/problems/product-of-the-last-k-numbers/",
+  "branch": "daily/2026-11-23-product-of-the-last-k-numbers",
+  "titleZh": "最后 K 个数的乘积",
+  "topicTags": [
+    "设计",
+    "数组",
+    "数学",
+    "数据流",
+    "前缀和"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
