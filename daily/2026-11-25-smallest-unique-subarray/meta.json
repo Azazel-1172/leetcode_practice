@@ -1,0 +1,37 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3934",
+  "date": "2026-11-25",
+  "slug": "smallest-unique-subarray",
+  "title": "Smallest Unique Subarray",
+  "difficulty": "Hard",
+  "topicTagsEn": [
+    "Array",
+    "Hash Table",
+    "Binary Search",
+    "Rolling Hash",
+    "Suffix Array",
+    "Hash Function"
+  ],
+  "url": "https://leetcode.com/problems/smallest-unique-subarray/",
+  "urlCn": "https://leetcode.cn/problems/smallest-unique-subarray/",
+  "branch": "daily/2026-11-25-smallest-unique-subarray",
+  "titleZh": "最短唯一子数组",
+  "topicTags": [
+    "数组",
+    "哈希表",
+    "二分查找",
+    "后缀数组",
+    "哈希函数",
+    "滚动哈希"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
