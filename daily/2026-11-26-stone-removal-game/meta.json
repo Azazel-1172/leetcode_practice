@@ -1,0 +1,29 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3360",
+  "date": "2026-11-26",
+  "slug": "stone-removal-game",
+  "title": "Stone Removal Game",
+  "difficulty": "Easy",
+  "topicTagsEn": [
+    "Math",
+    "Simulation"
+  ],
+  "url": "https://leetcode.com/problems/stone-removal-game/",
+  "urlCn": "https://leetcode.cn/problems/stone-removal-game/",
+  "branch": "daily/2026-11-26-stone-removal-game",
+  "titleZh": "移除石头游戏",
+  "topicTags": [
+    "数学",
+    "模拟"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
