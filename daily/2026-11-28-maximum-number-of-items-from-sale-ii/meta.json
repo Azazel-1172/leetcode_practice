@@ -1,0 +1,33 @@
+{
+  "userTags": [],
+  "status": "todo",
+  "notes": "",
+  "id": "3947",
+  "date": "2026-11-28",
+  "slug": "maximum-number-of-items-from-sale-ii",
+  "title": "Maximum Number of Items From Sale II",
+  "difficulty": "Medium",
+  "topicTagsEn": [
+    "Array",
+    "Greedy",
+    "Sorting",
+    "Heap (Priority Queue)"
+  ],
+  "url": "https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/",
+  "urlCn": "https://leetcode.cn/problems/maximum-number-of-items-from-sale-ii/",
+  "branch": "daily/2026-11-28-maximum-number-of-items-from-sale-ii",
+  "titleZh": "购买最多物品数目 II",
+  "topicTags": [
+    "贪心",
+    "数组",
+    "排序",
+    "堆（优先队列）"
+  ],
+  "translated": true,
+  "translateSource": "leetcode.cn",
+  "langs": [
+    "typescript",
+    "cpp",
+    "javascript"
+  ]
+}
